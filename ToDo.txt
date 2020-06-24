@@ -1,0 +1,3 @@
+1. Learn Authentication
+2. Use AOS
+3. trigger ajax call on scroll
