@@ -308,3 +308,43 @@ function discoverMedia(media, filters) {
 
 // release year
 // discoverMedia("movie", [options.release_year(2019), orderby.vote_count]);
+
+
+function displayRecommendedMedia(media, data1, data2) {
+      console.log(arguments);
+}
+function getRandom(limit) {
+      var r = parseInt(Math.random()*limit);
+      return (r + 1) % (limit+1);
+
+}
+function recommendMedia(media) {
+      // a random pages
+      var randPage = getRandom(25);           
+      // two diff random items from the page
+      var index1 = getRandom(20);           // 20 results on the page
+      var index2 = index1;
+      while(index2 === index1) {
+            index2 = getRandom(20);
+      }
+
+      var filters = [orderby.vote_count, options.page(randPage)];
+      query_url = getQueryUrl("/discover/" + media)(filters);
+
+      fetch(query_url)
+            .then(checkResponse)
+            .then(function (response) {
+                  console.log("All Ok!");
+                  return response.json();
+            })
+            .then(function(data) {
+                  displayRecommendedMedia(media, data.results[index1], data.results[index2]);
+            })
+            .catch(function (error) {
+                  console.log(error);
+            });
+      
+}
+
+recommendMedia("movie");
+recommendMedia("tv");
