@@ -91,13 +91,12 @@ function getAllGenres() {
             fetchData(query_url, fillGenresTv);
       }
 }
-getAllGenres();
 
 function fillLanguages(data) {
       data.forEach(element => {
             languages[element.iso_639_1] = element.english_name;
       });
-      console.log(languages);
+      // console.log(languages);
 }
 function getLanguages() {
       if (Object.keys(languages).length === 0 && tv_genres.constructor === Object) {
@@ -105,8 +104,8 @@ function getLanguages() {
             fetchData(query_url, fillLanguages)
       }
 }
+getAllGenres();
 getLanguages();
-
 
 function displayMovieDetails(data) {
       console.log(data);
@@ -195,53 +194,7 @@ function getSearchString(media) {
       var keywords = media.split(" ");
       return keywords.join("+");
 }
-function displayMultiSearch(data) {
-      console.log(data);
-      /*
-      if(media_type == "tv") 
-            displayTvSearch(data)
 
-      if(media_type === "movie")
-            displayPersonSearch(data)
-
-      if(media_type === "person")
-            displayPeresonSerach(data)
-      */
-}
-function displayMovieSearch(data) {
-      console.log(data);
-      /*
-      genre_ids: (3) [28, 12, 878]
-      id: 1726
-      original_language: "en"
-      overview: "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil."
-      poster_path: "/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"
-      release_date: "2008-04-30"
-      title: "Iron Man"
-      */
-}
-function displayTvSearch(data) {
-      console.log(data);
-      /* 
-      first_air_date: "2012-10-10"
-      genre_ids: (4) [80, 18, 9648, 10759]
-      id: 1412
-      name: "Arrow"
-      original_language: "en"
-      overview: "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow."
-      poster_path: "/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg"
-      */
-}
-function displayPersonSearch(data) {
-      console.log(data);
-      /* 
-      id: 1136406
-      known_for: (3) [{…}, {…}, {…}] - just get the title of the movies 
-      known_for_department: "Acting"
-      name: "Tom Holland"
-      profile_path: "/4eiFdjEtqb2pnWX6z98ADcYD9zV.jpg"
-      */
-}
 function searchMedia(media, query_str, pageNo) {
       // filters(Array) - primary release data, page
       var filters = [

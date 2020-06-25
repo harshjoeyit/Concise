@@ -1,19 +1,43 @@
-function displayRecommendedMedia(media, data) {
-      if (data[0] == undefined || data[1] == undefined) {
-            recommendMedia(media);
-            return;
+window.addEventListener('DOMContentLoaded', (event) => {
+      var search_str = location.search.substring(1);
+      var tokens = search_str.split("=");
+      console.log(tokens);
+      if ((tokens[0] === "multi" || tokens[0] === "movie" || tokens[0] === "tv" || tokens[0] === "person") && (tokens[1] !== "")) {
+            // do the search
+            searchMedia(tokens[0], tokens[1], tokens[2]);
+      } else {
+            console.log("invalid");
       }
 
-      var parent = document.querySelector(".result");
-      var final_str = "";
+      // using a loader 
+      var results = document.querySelector('.result');
+      var loader = document.querySelector('.loader');
+      var x = setInterval(function () {
+            if (results.childElementCount > 0) {
+                  loader.style.display = 'none';
+                  clearInterval(x);
+            } else {
+                  loader.style.display = 'block';
+            }
+      }, 100);
+});
 
-      if (media === "movie") {
-            data.forEach(element => {
-                  // getting all the genres
-                  var genres = element.genre_ids.map(function (id) {
-                        return movie_genres[id];
-                  });
 
+
+var parent = document.querySelector(".result");
+var genres;
+var known_for;
+
+
+
+function constructHTMLStr(element, media) {
+      item_str = "";
+
+      if (media == undefined) {
+            // multi search 
+            // get element.media_type
+      } else {
+            if (media === "movie") {
                   item_str = "<div class='item'>";
                   item_str += "<div class='poster'>";
                   item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.poster_path + " alt='poster' >";
@@ -37,17 +61,7 @@ function displayRecommendedMedia(media, data) {
                   item_str += "</div>";
                   item_str += "</div>";
 
-                  final_str += item_str;
-            });
-
-      } else if(media === "tv"){
-            console.log(data);
-            data.forEach(element => {
-                  // getting all the genres
-                  var genres = element.genre_ids.map(function (id) {
-                        return tv_genres[id];
-                  });
-
+            } else if (media === "tv") {
                   item_str = "<div class='item'>";
                   item_str += "<div class='poster'>";
                   item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.poster_path + " alt='poster' >";
@@ -70,65 +84,53 @@ function displayRecommendedMedia(media, data) {
                   item_str += "</div>";
                   item_str += "</div>";
                   item_str += "</div>";
-
-                  final_str += item_str;
-            });
-      } else {
-            document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">Page not found!</h1>';
-            return;
+            } else if (media === "person") {
+                  // needs to be constructed a new html_Str
+            }
       }
 
+      return item_str;
+}
+
+function displayMultiSearch(data) {
+      console.log(data);
+      /*
+      if(media_type == "tv") 
+            displayTvSearch(data)
+
+      if(media_type === "movie")
+            displayPersonSearch(data)
+
+      if(media_type === "person")
+            displayPeresonSerach(data)
+      */
+}
+function displayMovieSearch(data) {
+      var final_str = "";
+      data.results.forEach(element => {
+            genres = element.genre_ids.map(function (id) {
+                  return movie_genres[id];
+            });
+            final_str += constructHTMLStr(element, "movie");
+      });
       parent.innerHTML = final_str;
 }
-function getRandom(limit) {
-      var r = parseInt(Math.random() * limit);
-      return (r + 1) % (limit + 1);
-}
-function recommendMedia(media) {
-      // a random pages
-      var randPage = getRandom(25);
-      // two diff random items from the page
-      var index1 = getRandom(20);           // 20 results on the page
-      var index2 = index1;
-      while (index2 === index1) {
-            index2 = getRandom(20);
-      }
-
-      var filters = [orderby.vote_count, options.page(randPage)];
-      query_url = getQueryUrl("/discover/" + media)(filters);
-
-      fetch(query_url)
-            .then(checkResponse)
-            .then(function (response) {
-                  console.log("All Ok!");
-                  return response.json();
-            })
-            .then(function (data) {
-                  displayRecommendedMedia(media, [data.results[index1], data.results[index2]]);
-            })
-            .catch(function (error) {
-                  console.log(error);
+function displayTvSearch(data) {
+      console.log(data);
+      var final_str = "";
+      data.results.forEach(element => {
+            genres = element.genre_ids.map(function (id) {
+                  return tv_genres[id];
             });
-
+            final_str += constructHTMLStr(element, "tv");
+      });
+      parent.innerHTML = final_str;
 }
-
-window.addEventListener('DOMContentLoaded', (event) => {
-      var media = location.search.substring(1);
-      if(media === "movie" || media === "tv") {
-            recommendMedia(media);
-      } else {
-            document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">Page not found!</h1>';
-      }
-
-      // using a loader 
-      var results = document.querySelector('.result');
-      var loader = document.querySelector('.loader');
-      var x = setInterval(function () {
-            if (results.childElementCount > 0) {
-                  loader.style.display = 'none';
-                  clearInterval(x);
-            } else {
-                  loader.style.display = 'block';
-            }
-      }, 100);
-});
+function displayPersonSearch(data) {
+      console.log(data);
+      var final_str = "";
+      data.results.forEach(element => {
+            final_str += constructHTMLStr(element, "person");
+      });
+      parent.innerHTML = final_str;
+}
