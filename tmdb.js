@@ -73,13 +73,13 @@ function fillGenresMovie(data) {
       data.genres.forEach(function (element) {
             movie_genres[element.id] = element.name;
       });
-      console.log(movie_genres);
+      // console.log(movie_genres);
 }
 function fillGenresTv(data) {
       data.genres.forEach(function (element) {
             tv_genres[element.id] = element.name;
       });
-      console.log(tv_genres);
+      // console.log(tv_genres);
 }
 function getAllGenres() {
       if (Object.keys(movie_genres).length === 0 && movie_genres.constructor === Object) {
@@ -91,7 +91,7 @@ function getAllGenres() {
             fetchData(query_url, fillGenresTv);
       }
 }
-// getAllGenres();
+getAllGenres();
 
 function fillLanguages(data) {
       data.forEach(element => {
@@ -105,7 +105,7 @@ function getLanguages() {
             fetchData(query_url, fillLanguages)
       }
 }
-// getLanguages();
+getLanguages();
 
 
 function displayMovieDetails(data) {
@@ -310,41 +310,6 @@ function discoverMedia(media, filters) {
 // discoverMedia("movie", [options.release_year(2019), orderby.vote_count]);
 
 
-function displayRecommendedMedia(media, data1, data2) {
-      console.log(arguments);
-}
-function getRandom(limit) {
-      var r = parseInt(Math.random()*limit);
-      return (r + 1) % (limit+1);
 
-}
-function recommendMedia(media) {
-      // a random pages
-      var randPage = getRandom(25);           
-      // two diff random items from the page
-      var index1 = getRandom(20);           // 20 results on the page
-      var index2 = index1;
-      while(index2 === index1) {
-            index2 = getRandom(20);
-      }
-
-      var filters = [orderby.vote_count, options.page(randPage)];
-      query_url = getQueryUrl("/discover/" + media)(filters);
-
-      fetch(query_url)
-            .then(checkResponse)
-            .then(function (response) {
-                  console.log("All Ok!");
-                  return response.json();
-            })
-            .then(function(data) {
-                  displayRecommendedMedia(media, data.results[index1], data.results[index2]);
-            })
-            .catch(function (error) {
-                  console.log(error);
-            });
-      
-}
-
-recommendMedia("movie");
-recommendMedia("tv");
+// recommendMedia("movie");
+// recommendMedia("tv");

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>First</title>
+</head>
+
+<body>
+      <h1>This is heading 1</h1>
+      <button>Change</button>
+
+      <div class="result">
+            loading...
+      </div>
+
+      <script>
+            var btn = document.querySelector('button');
+            btn.addEventListener('click', function () {
+                  location.assign('second.html?media=movie&page=2&index=5');
+            });
+
+            var url = "https://api.themoviedb.org/3/discover/movie?api_key=89affa2cbcf8890a6f1ad6287012fd67&page=35";
+            var result = document.querySelector('.result');
+      
+            fetch(url)
+                  .then(function(response) {
+                        return response.json();
+                  })
+                  .then(function(data) {
+                        console.log(data);
+                        result.innerHTML = '';
+                        data.results.forEach(element => {
+                              console.log(element);
+                              result.append(element);
+                        });
+                  })
+
+            var x = setInterval(function () {
+                  if (result.childElementCount > 0) {
+                        console.log("done");
+                        clearInterval(x);
+                  }     
+            }, 50);
+
+      </script>
+</body>
+
+</html>
