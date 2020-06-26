@@ -11,6 +11,11 @@ header {
       width: 100%;
 }
 
+/* stops the blue highlight on tap/click */
+a {
+	-webkit-tap-highlight-color: transparent;
+}
+
 .company-logo {
       display: block;
       text-decoration: none;

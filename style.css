@@ -42,6 +42,11 @@
 	background-color:  #181a1b;
 }
 
+/* stops the blue highlight on tap/click */
+a {
+	-webkit-tap-highlight-color: transparent;
+}
+
 .sidebar-left-collapse .sidebar-links {
 	margin: 30px auto;
 }
