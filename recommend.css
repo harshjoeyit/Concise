@@ -121,6 +121,39 @@ img {
       text-align: center;
 }
 
+footer {
+      background-color: #292c2f;
+      height: 60px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+}
+
+footer button {
+      padding: 5px 6px;
+      border-radius: 50%;
+      color: white;
+      outline: none;
+      border: none;
+      background-color: tomato;
+      transition: 0.3s;
+}
+
+footer span {
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50%;
+      background-color: #181a1b;
+      margin: 10px;
+}
+
+footer button:hover {
+      background-color: white;
+      color: tomato;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }

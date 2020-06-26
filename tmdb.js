@@ -195,31 +195,6 @@ function getSearchString(media) {
       return keywords.join("+");
 }
 
-function searchMedia(media, query_str, pageNo) {
-      // filters(Array) - primary release data, page
-      var filters = [
-            options.query(getSearchString(query_str)),
-            orderby.popularity,
-            options.page(pageNo)
-      ]
-      query_url = getQueryUrl("/search/" + media)(filters);
-
-      if (media === "multi") {
-            fetchData(query_url, displayMultiSearch);
-      } else if (media === "movie") {
-            fetchData(query_url, displayMovieSearch);
-      } else if (media === "person") {
-            fetchData(query_url, displayPersonSearch);
-      } else if (media === "tv") {
-            fetchData(query_url, displayTvSearch);
-      }
-}
-// searchMedia("movie", "iron man", 1);
-// searchMedia("tv", "arrow", 1);
-// searchMedia("person", "tom holland");
-// searchMedia("multi", "robert", 1);
-
-
 // this option is visible of the detail page of a movie/tv show
 function getSimilarMedia(media, id) {
       query_url = getQueryUrl("/" + media + "/" + id + "/similar")([orderby.popularity]);

@@ -1,12 +1,22 @@
+var parent = document.querySelector(".result");
+var genres;
+var QueryStr;
+
 window.addEventListener('DOMContentLoaded', (event) => {
       var search_str = location.search.substring(1);
       var tokens = search_str.split("=");
       console.log(tokens);
-      if ((tokens[0] === "multi" || tokens[0] === "movie" || tokens[0] === "tv" || tokens[0] === "person") && (tokens[1] !== "")) {
+      if(tokens[0] == undefined || tokens[1] == undefined || tokens[2] == undefined || tokens[2] == "") {
+            document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">Page not found!</h1>';
+            return;
+      }
+      if (tokens[0] === "multi" || tokens[0] === "movie" || tokens[0] === "tv" || tokens[0] === "person") {
             // do the search
+            QueryStr = tokens[1];
             searchMedia(tokens[0], tokens[1], tokens[2]);
       } else {
-            console.log("invalid");
+            document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">Page not found!</h1>';
+            return;
       }
 
       // using a loader 
@@ -22,20 +32,59 @@ window.addEventListener('DOMContentLoaded', (event) => {
       }, 100);
 });
 
+function searchMedia(media, query_str, pageNo) {
+      // filters(Array) - primary release data, page
+      var filters = [
+            options.query(getSearchString(query_str)),
+            orderby.popularity,
+            options.page(pageNo)
+      ]
+      query_url = getQueryUrl("/search/" + media)(filters);
 
-
-var parent = document.querySelector(".result");
-var genres;
+      if (media === "multi") {
+            fetchData(query_url, displayMultiSearch);
+      } else if (media === "movie") {
+            fetchData(query_url, displayMovieSearch);
+      } else if (media === "person") {
+            fetchData(query_url, displayPersonSearch);
+      } else if (media === "tv") {
+            fetchData(query_url, displayTvSearch);
+      }
+}
 
 function displayMultiSearch(data) {
-      console.log(data);
+      if(data.total_results == 0) {
+            document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">No results found!</h1>';
+      }
       var final_str = "";
       data.results.forEach(element => {
             final_str += constructHTMLStr(element);
       });
-      parent.innerHTML = final_str;
+      parent.innerHTML = final_str + getFooter();
+
+      document.querySelector('footer span').textContent = data.page;
+
+      var prevBtn = document.querySelector('.prev-btn');
+      var nextBtn = document.querySelector('.next-btn');
+      nextBtn.addEventListener('click', function() {
+            if(data.page < data.total_pages) {
+                  window.location.assign('search_results.html?multi=' + QueryStr + '=' + (data.page+1));
+            } else {
+                  alert("This is the last page!")
+            }
+      });
+      prevBtn.addEventListener('click', function() {
+            if(data.page >= 2) {
+                  window.location.assign('search_results.html?multi=' + QueryStr + '=' + (data.page - 1));
+            } else {
+                  alert("This is the first page!");
+            }
+      });
 }
 function displayMovieSearch(data) {
+      if(data.total_results == 0) {
+            document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">No results found!</h1>';
+      }
       var final_str = "";
       data.results.forEach(element => {
             genres = element.genre_ids.map(function (id) {
@@ -43,10 +92,31 @@ function displayMovieSearch(data) {
             });
             final_str += constructHTMLStr(element, "movie");
       });
-      parent.innerHTML = final_str;
+      parent.innerHTML = final_str + getFooter();
+
+      document.querySelector('footer span').textContent = data.page;
+
+      var prevBtn = document.querySelector('.prev-btn');
+      var nextBtn = document.querySelector('.next-btn');
+      nextBtn.addEventListener('click', function() {
+            if(data.page < data.total_pages) {
+                  window.location.assign('search_results.html?movie=' + QueryStr + '=' + (data.page + 1));
+            } else {
+                  alert("This is the last page!");
+            }
+      });
+      prevBtn.addEventListener('click', function() {
+            if(data.page >= 2) {
+                  window.location.assign('search_results.html?movie=' + QueryStr + '=' + (data.page - 1));
+            }else {
+                  alert("This is the first page!");
+            }
+      });
 }
 function displayTvSearch(data) {
-      console.log(data);
+      if(data.total_results == 0) {
+            document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">No results found!</h1>';
+      }
       var final_str = "";
       data.results.forEach(element => {
             genres = element.genre_ids.map(function (id) {
@@ -54,24 +124,62 @@ function displayTvSearch(data) {
             });
             final_str += constructHTMLStr(element, "tv");
       });
-      parent.innerHTML = final_str;
+      parent.innerHTML = final_str + getFooter();
+
+      document.querySelector('footer span').textContent = data.page;
+
+      var prevBtn = document.querySelector('.prev-btn');
+      var nextBtn = document.querySelector('.next-btn');
+      nextBtn.addEventListener('click', function() {
+            if(data.page < data.total_pages) {
+                  window.location.assign('search_results.html?tv=' + QueryStr + '=' + (data.page + 1));
+            }else {
+                  alert("This is the last page!");
+            }
+      });
+      prevBtn.addEventListener('click', function() {
+            if(data.page >= 2) {
+                  window.location.assign('search_results.html?tv=' + QueryStr + '=' + (data.page - 1));
+            }else {
+                  alert("This is the first page!");
+            }
+      });
 }
 function displayPersonSearch(data) {
-      console.log(data);
+      if(data.total_results == 0) {
+            document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">No results found!</h1>';
+      }
       var final_str = "";
       data.results.forEach(element => {
             final_str += constructHTMLStr(element, "person");
       });
-      parent.innerHTML = final_str;
+      parent.innerHTML = final_str + getFooter();
+
+      document.querySelector('footer span').textContent = data.page;
+
+      var prevBtn = document.querySelector('.prev-btn');
+      var nextBtn = document.querySelector('.next-btn');
+      nextBtn.addEventListener('click', function() {
+            if(data.page < data.total_pages) {
+                  window.location.assign('search_results.html?person=' + QueryStr + '=' + (data.page + 1));
+            } else {
+                  alert("This is the last page");
+            }
+      });
+      prevBtn.addEventListener('click', function() {
+            if(data.page >= 2) {
+                  window.location.assign('search_results.html?person=' + QueryStr + '=' + (data.page - 1));
+            } else {
+                  alert("This is the first page!");
+            }
+      });
 }
 
 function constructHTMLStr(element, media) {
       item_str = "";
-
       if (media == undefined) {
             media = element.media_type;
       } 
-
       if (media === "movie") {
             item_str = "<div class='item'>";
             item_str += "<div class='poster'>";
@@ -146,7 +254,7 @@ function constructHTMLStr(element, media) {
             item_str += "<h2>" + element.name + "</h2>";
             item_str += "<div>";
             item_str += "<span><i style='color: #1295FF' class='fa fa-dot-circle-o'></i>" + element.known_for_department + "</span>";
-            item_str += "<span><i style='color: #AE3FFF' class='fa fa-thumbs-up'></i>" + element.popularity + "</span>";
+            item_str += "<span><i style='color: #AE3FFF' class='fa fa-thumbs-up'></i>" + element.popularity*1000 + "</span>";
             item_str += "</div>";
             item_str += "</div>";
             item_str += "<div class='known-for'>";
@@ -171,4 +279,15 @@ function constructHTMLStr(element, media) {
       }
 
       return item_str;
+}
+
+function getFooter() {
+      var footer_str = "<footer>";
+      footer_str += "<div>";
+      footer_str += "<button class = 'prev-btn'><i class='fa fa-arrow-left' aria-hidden='true'></i></button>";
+      footer_str += "<span>0</span>";
+      footer_str += "<button class = 'next-btn'><i class='fa fa-arrow-right' aria-hidden='true'></i></button>";
+      footer_str += "</div>";
+      footer_str += "</footer>";
+      return footer_str;
 }
