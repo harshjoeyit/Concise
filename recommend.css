@@ -101,6 +101,26 @@ img {
       display: none;
 }
 
+.known-for {
+      padding-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+}
+
+.project {
+      max-width: 60px;
+      width: 60px;
+      word-wrap: break-word;
+      padding: 5px;
+}
+
+.project p {
+      font-size: 0.7rem;
+      text-align: center;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
@@ -128,6 +148,16 @@ img {
             align-items: center;
             flex-direction: column;
       }
+      .project {
+            max-width: 90px;
+            width: 90px;
+            word-wrap: break-word;
+            padding: 5px;
+      }
+      .main-info>div{
+            width: 300px;
+      }
+      
 }
 
 @media (min-width: 900px) {
@@ -147,5 +177,11 @@ img {
             justify-content: center;
             align-items: center;
             flex-direction: column;
+      }
+      .project {
+            max-width: 110px;
+            width: 110px;
+            word-wrap: break-word;
+            padding: 5px;
       }
 }

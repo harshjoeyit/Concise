@@ -21,10 +21,10 @@
                               <i class="fa fa-search"></i>Search
                         </a>
                         <ul class="sub-links">
-                              <li><a href="#">Advanced</a></li>
-                              <li><a href="#">Movie</a></li>
-                              <li><a href="#">Tv Show</a></li>
-                              <li><a href="#">Person</a></li>
+                              <li><a href=javascript:void(0)>Advanced</a></li>
+                              <li><a href=javascript:void(0)>Movie</a></li>
+                              <li><a href=javascript:void(0)>Tv Show</a></li>
+                              <li><a href=javascript:void(0)>Person</a></li>
                         </ul>
                   </div>
 
@@ -65,24 +65,13 @@
       </aside>
 
       <div class="main-content">
+            <div class="search-form">
+                  <input type="text" placeholder="Type in here...">
+                  <button>Search</button>
+            </div>
       </div>
 
-      <script>
-            var sideBarLinks = document.querySelector('aside div');
-            var links = document.querySelectorAll('aside div div');
-
-            for (var i = 0; i < links.length; i++) {
-                  links[i].addEventListener('click', function () {
-                        var curr = document.querySelector('.selected');
-                        console.log(curr);
-                        // if for the consdition since in strting none is selceted so - curr = null
-                        if (curr) {
-                              curr.classList.remove('selected');
-                        }
-                        this.classList.add('selected');
-                  });
-            }
-      </script>
+      <script src="script.js"></script>
       <script src="tmdb.js"></script>
 </body>
 
