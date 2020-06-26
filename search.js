@@ -184,7 +184,7 @@ function constructHTMLStr(element, media) {
             item_str = "<div class='item'>";
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
-                  item_str += "<img src=/images/media.png alt='poster'>"
+                  item_str += "<img src=./images/media.png alt='poster'>"
             } else {
                   item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.poster_path + " alt='poster' >";
             }
@@ -214,7 +214,7 @@ function constructHTMLStr(element, media) {
             item_str = "<div class='item'>";
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
-                  item_str += "<img src=/images/media.png alt='poster'>"
+                  item_str += "<img src=./images/media.png alt='poster'>"
             } else {
                   item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.poster_path + " alt='poster' >";
             }
@@ -244,7 +244,7 @@ function constructHTMLStr(element, media) {
             item_str = "<div class='item'>";
             item_str += "<div class='poster'>";
             if (element.profile_path == null) {
-                  item_str += "<img src=/images/user.png alt='poster'>"
+                  item_str += "<img src=./images/user.png alt='poster'>"
             } else {
                   item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.profile_path + " alt='poster' >";
             }
@@ -261,7 +261,7 @@ function constructHTMLStr(element, media) {
             element.known_for.forEach(project => {
                   var proj_str = "<div class='project'>";
                   if (project.poster_path == null) {
-                        proj_str += "<img src=/images/media.png alt='poster'>"
+                        proj_str += "<img src=./images/media.png alt='poster'>"
                   } else {
                         proj_str += "<img src=https://image.tmdb.org/t/p/w300" + project.poster_path + " alt='poster' >";
                   }
