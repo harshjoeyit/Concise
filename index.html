@@ -5,7 +5,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="style.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
       <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
       <title>Explore the cinematic world!</title>
@@ -16,7 +16,7 @@
 
             <a href="index.html" class="company-logo">Concise</a>
             <div class="sidebar-links">
-                  <div class="link-blue">
+                  <div class="link-yellow">
                         <a href=javascript:void(0)>
                               <i class="fa fa-search"></i>Search
                         </a>
@@ -30,18 +30,27 @@
 
                   <div class="link-red">
                         <a href=javascript:void(0)>
-                              <i class="fa fa-map-marker"></i>Discover
+                              <i class="fa fa-film" aria-hidden="true"></i></i>Movies
                         </a>
                         <ul class="sub-links">
-                              <li><a href="#">Most Liked</a></li>
-                              <li><a href="#">Highest grosser</a></li>
-                              <li><a href="#">With cast</a></li>
+                              <li><a href="discover_results.html?movie&most-liked&1">Most Liked</a></li>
+                              <li><a href="discover_results.html?movie&highest-grossing&1">Highest grossing</a></li>
                               <li><a href="#">With genres</a></li>
                               <li><a href="#">With year</a></li>
                         </ul>
                   </div>
 
                   <div class="link-green">
+                        <a href=javascript:void(0)>
+                              <i class="fa fa-tv"></i>Tv Shows
+                        </a>
+                        <ul class="sub-links">
+                              <li><a href="discover_results.html?tv&most-liked&1">Most Liked</a></li>
+                              <li><a href="#">With genres</a></li>
+                        </ul>
+                  </div>
+
+                  <div class="link-orange">
                         <a href=javascript:void(0)>
                               <i class="fa fa-pencil"></i>Recommend
                         </a>
@@ -51,14 +60,13 @@
                         </ul>
                   </div>
 
-                  <div class="link-yellow">
+                  <div class="link-blue">
                         <a href=javascript:void(0)>
                               <i class="fa fa-info-circle"></i>About
                         </a>
                         <ul class="sub-links">
                               <li><a href="#">Concise</a></li>
-                              <li><a href="#">Developer</a></li>
-                              <li><a href="#">Contact</a></li>
+                              <li><a href="developer.html">Developer</a></li>
                         </ul>
                   </div>
             </div>

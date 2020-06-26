@@ -16,7 +16,7 @@ var baseSearchResultLocation = 'search_results.html';
 // multi search by default
 var searchResultLocation = baseSearchResultLocation + "?multi=";
 var finalSearchLocation;
-var searchLinks = document.querySelectorAll('.link-blue .sub-links > li');
+var searchLinks = document.querySelectorAll('.link-yellow .sub-links > li');
 var searchBtn = document.querySelector('.search-form > button');
 var searchInput = document.querySelector('.search-form > input');
 

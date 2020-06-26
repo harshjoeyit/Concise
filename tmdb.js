@@ -209,11 +209,12 @@ function getSimilarMedia(media, id) {
 
 
 function discoverMedia(media, filters) {
+      media_disc = media;
       query_url = getQueryUrl("/discover/" + media)(filters);
       if (media === "movie") {
-            fetchData(query_url, displayMovieSearch);
+            fetchData(query_url, displayDiscoverResults);
       } else if (media === "tv") {
-            fetchData(query_url, displayTvSearch);
+            fetchData(query_url, displayDiscoverResults);
       }
 }
 // discoverMedia("movie", [options.page(5)]);
@@ -226,9 +227,6 @@ function discoverMedia(media, filters) {
 // highest grossing movies 
 // discoverMedia("movie", [orderby.revenue, options.page(2)]);
 
-// with cast(only for movies)
-// discoverMedia("movie", [options.cast([3223, 16828]), orderby.vote_count, options.page(1)]);
-
 // with genres
 // discoverMedia("movie", [options.genres([35, 12, 28]), orderby.vote_count, options.page(3)]);
 // use the tv genres only
@@ -239,5 +237,119 @@ function discoverMedia(media, filters) {
 
 
 
-// recommendMedia("movie");
-// recommendMedia("tv");
+// both these functions are used on the search_results page
+function constructHTMLStr(element, media) {
+      item_str = "";
+      if (media == undefined) {
+            media = element.media_type;
+      } 
+      if (media === "movie") {
+            item_str = "<div class='item'>";
+            item_str += "<div class='poster'>";
+            if (element.poster_path == null) {
+                  item_str += "<img src=./images/media.png alt='poster'>"
+            } else {
+                  item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.poster_path + " alt='poster' >";
+            }
+            item_str += "</div>"
+            item_str += "<div class='info'>";
+            item_str += "<div class='main-info'>";
+            item_str += "<h2>" + element.title + "</h2>";
+            item_str += "<div>";
+            item_str += "<span><i style='color: #5C7D76' class='fa fa-calendar'></i>" + element.release_date + "</span>";
+            item_str += "<span><i style='color: #0380A3' class='fa fa-language'></i>" + languages[element.original_language] + "</span>";
+            item_str += "</div>";
+            genres = element.genre_ids.map(function (id) {
+                  return movie_genres[id];
+            });
+            item_str += "<p><i style='color: #BE5300' class='fa fa-film'></i>" + genres.join(", ") + "</p>";
+            item_str += "</div>";
+            item_str += "<div class='extra-info'>";
+            item_str += "<p>" + element.overview + "</p>";
+            item_str += "<div>";
+            item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
+            item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
+            item_str += "</div>";
+            item_str += "</div>";
+            item_str += "</div>";
+            item_str += "</div>";
+      } else if (media === "tv") {
+            item_str = "<div class='item'>";
+            item_str += "<div class='poster'>";
+            if (element.poster_path == null) {
+                  item_str += "<img src=./images/media.png alt='poster'>"
+            } else {
+                  item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.poster_path + " alt='poster' >";
+            }
+            item_str += "</div>"
+            item_str += "<div class='info'>";
+            item_str += "<div class='main-info'>";
+            item_str += "<h2>" + element.name + "</h2>";
+            item_str += "<div>";
+            item_str += "<span><i style='color: #5C7D76' class='fa fa-calendar'></i>" + element.first_air_date + "</span>";
+            item_str += "<span><i style='color: #0380A3' class='fa fa-language'></i>" + languages[element.original_language] + "</span>";
+            item_str += "</div>";
+            genres = element.genre_ids.map(function (id) {
+                  return tv_genres[id];
+            });
+            item_str += "<p><i style='color: #BE5300' class='fa fa-film'></i>" + genres.join(", ") + "</p>";
+            item_str += "</div>";
+            item_str += "<div class='extra-info'>";
+            item_str += "<p>" + element.overview + "</p>";
+            item_str += "<div>";
+            item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
+            item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
+            item_str += "</div>";
+            item_str += "</div>";
+            item_str += "</div>";
+            item_str += "</div>";
+      } else if (media === "person") {
+            item_str = "<div class='item'>";
+            item_str += "<div class='poster'>";
+            if (element.profile_path == null) {
+                  item_str += "<img src=./images/user.png alt='poster'>"
+            } else {
+                  item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.profile_path + " alt='poster' >";
+            }
+            item_str += "</div>"
+            item_str += "<div class='info'>";
+            item_str += "<div class='main-info'>";
+            item_str += "<h2>" + element.name + "</h2>";
+            item_str += "<div>";
+            item_str += "<span><i style='color: #1295FF' class='fa fa-dot-circle-o'></i>" + element.known_for_department + "</span>";
+            item_str += "<span><i style='color: #AE3FFF' class='fa fa-thumbs-up'></i>" + element.popularity*1000 + "</span>";
+            item_str += "</div>";
+            item_str += "</div>";
+            item_str += "<div class='known-for'>";
+            element.known_for.forEach(project => {
+                  var proj_str = "<div class='project'>";
+                  if (project.poster_path == null) {
+                        proj_str += "<img src=./images/media.png alt='poster'>"
+                  } else {
+                        proj_str += "<img src=https://image.tmdb.org/t/p/w300" + project.poster_path + " alt='poster' >";
+                  }
+                  if (project.media_type == "movie") {
+                        proj_str += "<p>" + project.title + "</p>";
+                  } else {
+                        proj_str += "<p>" + project.name + "</p>";
+                  }
+                  proj_str += "</div>";
+                  item_str += proj_str;
+            });
+            item_str += "</div>";
+            item_str += "</div>";
+            item_str += "</div>";
+      }
+
+      return item_str;
+}
+function getFooter() {
+      var footer_str = "<footer>";
+      footer_str += "<div>";
+      footer_str += "<button class = 'prev-btn'><i class='fa fa-arrow-left' aria-hidden='true'></i></button>";
+      footer_str += "<span>0</span>";
+      footer_str += "<button class = 'next-btn'><i class='fa fa-arrow-right' aria-hidden='true'></i></button>";
+      footer_str += "</div>";
+      footer_str += "</footer>";
+      return footer_str;
+}

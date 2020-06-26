@@ -1,7 +1,7 @@
 1. Learn Authentication
 2. Use AOS
-3. trigger ajax call on scroll
-
+3. Images not loading on the github/ try using the online images instead of local images
+      make sure they are https:// -- images 
 
 current features
 

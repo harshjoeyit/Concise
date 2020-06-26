@@ -59,11 +59,12 @@ a {
 	background-color: #35393e;
 	text-align: left;
 	color:  white;
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	line-height: 2;
 	border-left-width: 2px;
 	border-left-style: solid;
+	letter-spacing: 0.08em;
 }
 
 .sidebar-links div.selected > a{
@@ -130,6 +131,14 @@ a {
 
 .sidebar-links div.link-yellow > a i.fa {
 	color: #d0d237;
+}
+
+.sidebar-links div.link-orange > a {
+	border-color: #ff7a2d;
+}
+
+.sidebar-links div.link-orange > a i.fa {
+	color: #ff7a2d;
 }
 
 .sidebar-links div.link-green > a {
