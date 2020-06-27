@@ -1,3 +1,5 @@
+/* for opening up links when the main links are clicked */
+
 var sideBarLinks = document.querySelector('aside div');
 var links = document.querySelectorAll('aside div div');
 
@@ -11,6 +13,8 @@ for (var i = 0; i < links.length; i++) {
             this.classList.add('selected');
       });
 }
+
+/* for controlling the type of search done */
 
 var baseSearchResultLocation = 'search_results.html';
 // multi search by default
@@ -44,5 +48,42 @@ searchBtn.addEventListener('click', function() {
             finalSearchLocation = searchResultLocation + inputVal.trim().split(' ').join('+') + "=1";
             // console.log(finalSearchLocation);
             window.location.assign(finalSearchLocation);
+      }
+});
+
+
+/* For getting the movies based on release date */
+
+var searchForm = document.querySelector('.search-form');
+var yearForm = document.querySelector('.year-form');
+
+var searchLinkMain = document.querySelector('.sidebar-links .link-yellow');
+searchLinkMain.addEventListener('click', function() {
+      searchForm.style.display = 'block';
+      yearForm.style.display = 'none';
+});
+
+var baseDiscoverLocation = "discover_results.html?movie&with-year&";
+var discoverWithYearLink = document.querySelectorAll('.link-red .sub-links > li')[3];
+discoverWithYearLink.addEventListener('click', function() {
+      if(yearForm.style.display == 'none') {
+            searchForm.style.display = 'none';
+            yearForm.style.display = 'block';
+      } else {
+            searchForm.style.display = 'block';
+            yearForm.style.display = 'none';
+      }
+});
+
+var yearFormBtn = document.querySelector('.year-form button');
+var yearFormInput = document.querySelector('.year-form input');
+
+yearFormBtn.addEventListener('click', function() {
+      var inputVal = yearFormInput.value;
+      console.log(inputVal);
+      if(inputVal === "") {
+            return;
+      } else {
+            window.location.assign(baseDiscoverLocation + inputVal + '&1');
       }
 });

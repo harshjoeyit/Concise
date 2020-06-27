@@ -7,7 +7,7 @@ body {
 header {
       background-color: #292c2f;
       padding: 5px 0;
-      position: fixed;
+      /* position: fixed; */
       width: 100%;
 }
 
@@ -33,9 +33,7 @@ a {
 }
 
 .main-content {
-      position: relative;
-      top: 110px;
-      z-index: -1;
+      /* z-index: -1; */
       padding: 10px;
 }
 
@@ -193,7 +191,7 @@ footer button:hover {
             padding: 5px;
       }
       .main-info>div{
-            width: 300px;
+            width: 400px;
       }
       
 }
