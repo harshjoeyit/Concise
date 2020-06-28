@@ -1,13 +1,14 @@
 var parent = document.querySelector(".result");
 var disc_filters;
 var disc_media;
+var disc_category;
 var genres;
 var tokens;
 
 window.addEventListener('DOMContentLoaded', (event) => {
       var disc_str = location.search.substring(1);
       // when ?disc_str is missing
-      if(disc_str === "") {
+      if (disc_str === "") {
             noResults();
             return;
       }
@@ -15,43 +16,68 @@ window.addEventListener('DOMContentLoaded', (event) => {
       tokens = disc_str.split('&');
       console.log(tokens);
 
-      if((tokens[0] !== "movie" && tokens[0] !== "tv") || tokens.length == 1 || tokens[2] === "") {
+      if ((tokens[0] !== "movie" && tokens[0] !== "tv") || tokens.length == 1 || tokens[2] === "") {
             noResults();
             return;
       }
-      
-      if(tokens[0] === "movie") {
-            disc_media = "movie";
 
-            if(tokens[1] === "most-liked") {
+      disc_media = tokens[0];
+      disc_category = tokens[1];
+
+      if (tokens[0] === "movie") {
+            if (tokens[1] === "most-liked") {
                   // tokens[2] is page number 
                   disc_filters = [orderby.vote_count, options.page(tokens[2])];
                   discoverMedia("movie", disc_filters);
-            
-            } else if(tokens[1] === "highest-grossing") {
+
+            } else if (tokens[1] === "highest-grossing") {
                   disc_filters = [orderby.revenue, options.page(tokens[2])];
                   discoverMedia("movie", disc_filters);
 
-            } else if(tokens[1] === "with-genres") {
+            } else if (tokens[1] === "with-genres") {
                   // token[2] becomes the genre list seperated by commas
                   // token[3] - page number 
-            } else if(tokens[1] === "with-year") {
-                  // token[2] becomes the year
-                  // token[3] - page number 
+                  console.log('hello genres m');
+                  if (tokens[2] === undefined || tokens[2] === "" || tokens[3] === undefined || tokens[3] === "") {
+                        noResults();
+                        return;
+                  } else {
+                        disc_filters = [options.genres(tokens[2].split(',')), orderby.vote_count, options.page(tokens[3])];
+                        discoverMedia("movie", disc_filters);
+                  }
+            } else if (tokens[1] === "with-year") {
+                  if (tokens[2] === undefined || tokens[2] === "" || tokens[3] === undefined || tokens[3] === "") {
+                        noResults();
+                        return;
+                  } else {
+                        // code for getting the movie with release year
+                        disc_filters = [options.release_year(tokens[2]), orderby.vote_count, options.page(tokens[3])];
+                        discoverMedia("movie", disc_filters);
+                  }
+            } else if (tokens[1] === "select-genres") {
+                  createInputForGenres();
             } else {
                   noResults();
                   return;
             }
 
-      } else if(tokens[0] === "tv") {
-            disc_media = "tv";
-
-            if(tokens[1] === "most-liked") {
+      } else if (tokens[0] === "tv") {
+            if (tokens[1] === "most-liked") {
                   disc_filters = [orderby.vote_count, options.page(tokens[2])];
                   discoverMedia("tv", disc_filters);
-            } else if(tokens[1] === "with-genres") {
+            } else if (tokens[1] === "with-genres") {
                   // token[2] becomes the genre list seperated by commas
                   // token[3] - page number
+                  console.log('hello genres t');
+                  if (tokens[2] === undefined || tokens[2] === "" || tokens[3] === undefined || tokens[3] === "") {
+                        noResults();
+                        return;
+                  } else {
+                        disc_filters = [options.genres(tokens[2].split(',')), orderby.vote_count, options.page(tokens[3])];
+                        discoverMedia("tv", disc_filters);
+                  }
+            } else if (tokens[1] === "select-genres") {
+                  createInputForGenres();
             } else {
                   noResults();
                   return;
@@ -71,6 +97,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (results.childElementCount > 0) {
                   loader.style.display = 'none';
                   clearInterval(x);
+                  if(tokens[1] === "select-genres") {
+                        addListeerToSubmitButton();
+                  }
             } else {
                   loader.style.display = 'block';
             }
@@ -83,11 +112,11 @@ function noResults() {
 
 function displayDiscoverResults(data) {
       // console.log(data);
-      if(data.total_results == 0) {
+      if (data.total_results == 0) {
             noResults();
       }
       var final_str = "";
-      if(disc_media === "movie") {
+      if (disc_media === "movie") {
             data.results.forEach(element => {
                   genres = element.genre_ids.map(function (id) {
                         return movie_genres[id];
@@ -108,18 +137,62 @@ function displayDiscoverResults(data) {
 
       var prevBtn = document.querySelector('.prev-btn');
       var nextBtn = document.querySelector('.next-btn');
-      nextBtn.addEventListener('click', function() {
-            if(data.page < data.total_pages) {
-                  window.location.assign('discover_results.html'+'?'+tokens[0]+'&'+tokens[1]+'&'+(data.page + 1));
+      nextBtn.addEventListener('click', function () {
+
+            if (data.page < data.total_pages) {
+                  tokens.pop();
+                  window.location.assign('discover_results.html' + '?' + tokens.join('&').substring(-1) + '&' + (data.page + 1));
             } else {
                   alert("This is the last page!");
             }
       });
-      prevBtn.addEventListener('click', function() {
-            if(data.page >= 2) {
-                  window.location.assign('discover_results.html'+'?'+tokens[0]+'&'+tokens[1]+'&'+(data.page - 1));
-            }else {
+      prevBtn.addEventListener('click', function () {
+            if (data.page >= 2) {
+                  tokens.pop();
+                  window.location.assign('discover_results.html' + '?' + tokens.join('&') + '&' + (data.page - 1));
+            } else {
                   alert("This is the first page!");
             }
       });
+}
+
+
+function createInputForGenres() {
+      var query_url = getQueryUrl("/genre/" + disc_media + "/list")([]);
+
+      fetchData(query_url, function (data) {
+            var str = "";
+            str += "<div class='genre-form'>";
+            data.genres.forEach(element => {
+                  str += "<div class='input-box'>";
+                  str += "<label><input type='checkbox' value=" + element.id + ">" + element.name + "</label>";
+                  str += "</div>";
+            });
+
+            str += "<div class='submit-genres'> <button> Find " + ((disc_media === "movie") ? "Movies" : "TV Shows") + "</button>";
+            str += "</div>";
+            parent.innerHTML = str;
+      });
+}
+
+
+function addListeerToSubmitButton() {
+      var submitBtn = document.querySelector('.submit-genres>button');
+      var checkboxes = document.querySelectorAll('.genre-form > div.input-box > label > input');
+
+      submitBtn.addEventListener('click', function () {
+            var checked = [];
+            for (var i = 0; i < checkboxes.length; i++) {
+                  if (checkboxes[i].checked === true) {
+                        checked.push(checkboxes[i].value);
+                  }
+            }
+            
+            if(checked.length === 0) {
+                  alert("At least one genre must be selected!")
+            } else {
+                  console.log(checked.join(','));
+                  window.location.assign('discover_results.html?' + disc_media + '&with-genres&' + checked.join(',') + "&1");
+            }
+      })
 }

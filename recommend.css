@@ -12,8 +12,9 @@ header {
 }
 
 /* stops the blue highlight on tap/click */
+
 a {
-	-webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: transparent;
 }
 
 .company-logo {
@@ -47,7 +48,7 @@ a {
       margin: 15px 15px 0;
 }
 
-.item {
+.item, .genre-form {
       margin-bottom: 50px;
       border: 1px solid #292c2f;
       border-radius: 5px;
@@ -84,18 +85,21 @@ img {
       text-align: center;
 }
 
-.main-info > p, .extra-info > p {
+.main-info>p, .extra-info>p {
       margin: 8px 0;
       text-align: center;
 }
+
 .result i.fa {
       font-size: 20px;
       margin: 5px;
 }
 
 .loader {
-      border: 10px solid #f3f3f3; /* Light grey */
-      border-top: 10px solid #292c2f; /* Blue */
+      border: 10px solid #f3f3f3;
+      /* Light grey */
+      border-top: 10px solid #292c2f;
+      /* Blue */
       border-radius: 50%;
       width: 50px;
       height: 50px;
@@ -158,10 +162,38 @@ footer button:hover {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+      0% {
+            transform: rotate(0deg);
+      }
+      100% {
+            transform: rotate(360deg);
+      }
 }
 
+.genre-form .submit-genres {
+      margin-top: 20px;
+      margin-bottom: 10px;
+}
+
+.genre-form .submit-genres>button {
+      padding: 5px 6px;
+      color: white;
+      outline: none;
+      border: none;
+      background-color: #292c2f;
+      transition: 0.2s;
+      margin-left: 5px; 
+}
+
+.genre-form .submit-genres>button:hover {
+      background-color: #181a1b;
+}
+
+.genre-form .submit-genres>button:active {
+      transform: scale(0.95);
+}
+
+/* Media Queries */
 
 @media (min-width: 450px) {
       .item {
@@ -190,10 +222,14 @@ footer button:hover {
             word-wrap: break-word;
             padding: 5px;
       }
-      .main-info>div{
+      .main-info>div {
             width: 400px;
       }
-      
+
+      .genre-form {
+            width: 35vw;
+            margin: auto;
+      }
 }
 
 @media (min-width: 900px) {
@@ -219,5 +255,10 @@ footer button:hover {
             width: 110px;
             word-wrap: break-word;
             padding: 5px;
+      }
+
+      .genre-form {
+            width: 25vw;
+            margin: auto;
       }
 }
