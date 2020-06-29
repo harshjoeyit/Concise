@@ -5,7 +5,7 @@
 .main-content {
       max-width: 80vw;
       margin: 0 0 0 20vw;
-	background-color: rgb(48, 177, 194);
+	background-color: white;
 }
 
 .main-content .forms {
@@ -17,13 +17,17 @@
 	font-family: 'PT Sans', sans-serif;
 }
 
-.forms input[type="text"], input[type="number"] {
+.forms input[type="text"] {
 	padding: 10px 15px;
-	font-size: 15px;
+	font-size: 16px;
 	border-radius: 3px;
-	border: 1px solid #292c2f;
+	border: none;
+	box-shadow: 1px 3px 5px 1px rgb(204, 204, 204);
 	outline: none;
 	width: 40vw;
+}
+.forms input[type="text"]:focus {
+      box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
 }
 
 .forms button {
@@ -34,20 +38,18 @@
 	outline: none;
 	color: white;
 	background-color: #292c2f;
-	transition: 0.08s;
+	box-shadow: 1px 3px 5px 1px rgb(204, 204, 204);
+	transition: 0.1s;
 }
 
 .forms button:hover {
 	color: #292c2f;
 	background-color: white;
+	box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
 }
 
 .forms button:active {
 	transform: scale(0.95);
-}
-
-.year-form {
-	display: none;
 }
 
 /* The left-collapsing sidebar */
@@ -276,7 +278,7 @@ a {
 		margin-top: 20px;
 	} 
 
-	.forms input[type="text"], input[type="number"] {
+	.forms input[type="text"] {
 		padding: 8px 12px;
 		font-size: 15px;
 		width: 50vw;

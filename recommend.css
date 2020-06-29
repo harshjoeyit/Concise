@@ -48,7 +48,7 @@ a {
       margin: 15px 15px 0;
 }
 
-.item, .genre-form {
+.item, .genre-form, .year-form {
       margin-bottom: 50px;
       border: 1px solid #292c2f;
       border-radius: 5px;
@@ -175,22 +175,49 @@ footer button:hover {
       margin-bottom: 10px;
 }
 
-.genre-form .submit-genres>button {
-      padding: 5px 6px;
-      color: white;
-      outline: none;
-      border: none;
-      background-color: #292c2f;
-      transition: 0.2s;
-      margin-left: 5px; 
+.genre-form .submit-genres>button, .year-form>button{
+      padding: 10px 15px;
+	font-size: 15px;
+	border-radius: 3px;
+	border: 1px solid #292c2f;
+	outline: none;
+	color: white;
+	background-color: #292c2f;
+	box-shadow: 1px 3px 5px 1px rgb(204, 204, 204);
+	transition: 0.1s;
 }
 
-.genre-form .submit-genres>button:hover {
-      background-color: #181a1b;
+.genre-form .submit-genres>button:hover, .year-form>button:hover{
+      color: #292c2f;
+	background-color: white;
+	box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
 }
 
-.genre-form .submit-genres>button:active {
+.genre-form .submit-genres>button:active, .year-form>button:active {
       transform: scale(0.95);
+}
+
+.year-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 30px 0;
+}
+
+.year-form>input {
+      width: 60%;
+      margin: 0 0 10px 0;
+      padding: 10px 15px;
+      border-radius: 3px;
+      border: none;
+      box-shadow: 1px 3px 5px 1px rgb(204, 204, 204);
+      font-size: 16px;
+      transition: 0.4s;
+}
+.year-form>input:focus {
+      box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
+      outline: none;
 }
 
 /* Media Queries */
@@ -230,6 +257,11 @@ footer button:hover {
             width: 35vw;
             margin: auto;
       }
+
+      .year-form {
+            width: 50vw;
+            margin: auto;
+      }
 }
 
 @media (min-width: 900px) {
@@ -261,4 +293,10 @@ footer button:hover {
             width: 25vw;
             margin: auto;
       }
+
+      .year-form {
+            width: 50vw;
+            margin: auto;
+      }
+
 }
