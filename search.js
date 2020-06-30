@@ -58,6 +58,8 @@ function displaySearchResults(data) {
 
       parent.innerHTML = final_str + getFooter();
       document.querySelector('footer span').textContent = data.page;
+      // event listeener for details 
+      addEventListenerToItems();
       // adding event listener to the buttons
       addEventListenerToButtons(data.page, data.total_pages);
 }

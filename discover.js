@@ -6,6 +6,22 @@ var genres;
 var tokens;
 
 window.addEventListener('DOMContentLoaded', (event) => {
+      // using a loader 
+      var results = document.querySelector('.result');
+      var loader = document.querySelector('.loader');
+      var x = setInterval(function () {
+            if (results.childElementCount > 0) {
+                  loader.style.display = 'none';
+                  clearInterval(x);
+                  if (tokens[1] === "select-genres" || tokens[1] === "select-year") {
+                        addListenerToSubmitButton();
+                  }
+            } else {
+                  loader.style.display = 'block';
+            }
+      }, 100);
+
+      // validating the URL
       var disc_str = location.search.substring(1);
       // if ?disc_str... is missing
       if (disc_str === "") {
@@ -86,21 +102,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             console.log("invalid media");
             return;
       }
-
-      // using a loader 
-      var results = document.querySelector('.result');
-      var loader = document.querySelector('.loader');
-      var x = setInterval(function () {
-            if (results.childElementCount > 0) {
-                  loader.style.display = 'none';
-                  clearInterval(x);
-                  if (tokens[1] === "select-genres" || tokens[1] === "select-year") {
-                        addListenerToSubmitButton();
-                  }
-            } else {
-                  loader.style.display = 'block';
-            }
-      }, 100);
 });
 
 function discoverMedia(media, filters) {
@@ -125,6 +126,8 @@ function displayDiscoverResults(data) {
 
       parent.innerHTML = final_str + getFooter();
       document.querySelector('footer span').textContent = data.page;
+      // event listeener for details 
+      addEventListenerToItems();
       // adding event listener to the buttons
       addEventListenerToButtons(data.page, data.total_pages);
 }

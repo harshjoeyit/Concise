@@ -53,6 +53,7 @@ function checkResponse(response) {
       }
       return response;
 }
+
 function fetchData(query_url, responseFunction) {
       fetch(query_url)
             .then(checkResponse)
@@ -74,11 +75,13 @@ function fillGenresMovie(data) {
             movie_genres[element.id] = element.name;
       });
 }
+
 function fillGenresTv(data) {
       data.genres.forEach(function (element) {
             tv_genres[element.id] = element.name;
       });
 }
+
 function getAllGenres() {
       if (Object.keys(movie_genres).length === 0 && movie_genres.constructor === Object) {
             query_url = getQueryUrl("/genre/movie/list")([]);
@@ -96,53 +99,17 @@ function fillLanguages(data) {
       });
       // console.log(languages);
 }
+
 function getLanguages() {
       if (Object.keys(languages).length === 0 && tv_genres.constructor === Object) {
             query_url = getQueryUrl("/configuration/languages")([]);
             fetchData(query_url, fillLanguages)
       }
 }
+
 getAllGenres();
 getLanguages();
 
-
-
-/* Details section  */
-
-function displayMovieDetails(data) {
-      console.log(data);
-      // do
-}
-function displayTvShowDetails(data) {
-      console.log(data);
-      // do
-}
-function displayPersonDetails(data) {
-      console.log(data);
-      // do
-}
-function displayTvShowSeasonDetail(data) {
-      console.log(data);
-      // do
-      // remember to put on ids on the the tv seasons and add event listeners 
-}
-function getMediaDetails(media, media_id, season_id) {
-      query_url = getQueryUrl("/" + media + "/" + media_id)([]);
-      if (media === "movie") {
-            fetchData(query_url, displayMovieDetails);
-      } else if (media === "tv") {
-            fetchData(query_url, displayTvShowDetails);
-      } else if (media === "person") {
-            fetchData(query_url, displayPersonDetails)
-      } else if (media === "tv_season") {
-            query_url = getQueryUrl("/tv/" + media_id + "/season/" + season_id)([]);
-            fetchData(query_url, displayTvShowSeasonDetail);
-      }
-}
-// getMediaDetails("movie", 1726);
-// getMediaDetails("tv", 1399);
-// getMediaDetails("person", 500);
-// getMediaDetails("tv_season", 1399, 6);
 
 function getSearchString(media) {
       var keywords = media.split(" ");
@@ -170,21 +137,20 @@ function constructHTMLStr(element, media) {
             media = element.media_type;
       
       } 
-      
       if (media === "movie") {
-            item_str = "<div class='item'>";
+            item_str = "<div class='item movie' id=" + element.id + ">";
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
                   item_str += "<img src=./images/media.png alt='poster'>"
             } else {
                   item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.poster_path + " alt='poster' >";
             }
-            item_str += "</div>"
+            item_str += "</div>";
             item_str += "<div class='info'>";
             item_str += "<div class='main-info'>";
             item_str += "<h2>" + element.title + "</h2>";
             item_str += "<div>";
-            item_str += "<span><i style='color: #5C7D76' class='fa fa-calendar'></i>" + element.release_date + "</span>";
+            item_str += "<span><i style='color: #742ce8' class='fa fa-calendar'></i>" + element.release_date + "</span>";
             item_str += "<span><i style='color: #0380A3' class='fa fa-language'></i>" + languages[element.original_language] + "</span>";
             item_str += "</div>";
             genres = element.genre_ids.map(function (id) {
@@ -203,14 +169,14 @@ function constructHTMLStr(element, media) {
             item_str += "</div>";
       
       } else if (media === "tv") {
-            item_str = "<div class='item'>";
+            item_str = "<div class='item tv' id=" + element.id + ">";
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
                   item_str += "<img src=./images/media.png alt='poster'>"
             } else {
                   item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.poster_path + " alt='poster' >";
             }
-            item_str += "</div>"
+            item_str += "</div>";
             item_str += "<div class='info'>";
             item_str += "<div class='main-info'>";
             item_str += "<h2>" + element.name + "</h2>";
@@ -234,14 +200,14 @@ function constructHTMLStr(element, media) {
             item_str += "</div>";
       
       } else if (media === "person") {
-            item_str = "<div class='item'>";
+            item_str = "<div class='item person' id=" + element.id + ">";
             item_str += "<div class='poster'>";
             if (element.profile_path == null) {
                   item_str += "<img src=./images/user.png alt='poster'>"
             } else {
                   item_str += "<img src=https://image.tmdb.org/t/p/w500" + element.profile_path + " alt='poster' >";
             }
-            item_str += "</div>"
+            item_str += "</div>";
             item_str += "<div class='info'>";
             item_str += "<div class='main-info'>";
             item_str += "<h2>" + element.name + "</h2>";
@@ -272,6 +238,30 @@ function constructHTMLStr(element, media) {
       }
 
       return item_str;
+}
+
+function addEventListenerToItems () {
+      var movieItems = document.querySelectorAll('.movie');
+      var tvItems = document.querySelectorAll('.tv');
+      var personItems = document.querySelectorAll('.person');
+      
+      movieItems.forEach(element => {
+            element.addEventListener('click', function () {
+                  window.location.assign('media_details.html?movie&' + element.id);
+            });
+      });
+
+      tvItems.forEach(element => {
+            element.addEventListener('click', function () {
+                  window.location.assign('media_details.html?tv&' + element.id);
+            });
+      });
+
+      personItems.forEach(element => {
+            element.addEventListener('click', function () {
+                  window.location.assign('media_details.html?person&' + element.id);
+            });
+      });
 }
 
 // footer with next and previous buttons

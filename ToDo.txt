@@ -1,7 +1,7 @@
 1. Learn Authentication
 
 2. Use AOS
-3. Shift the year of input form to discover page
+4. add a small tag to the item to differentiate b/w movie and tv show
 
 - search results 
       - multi 
