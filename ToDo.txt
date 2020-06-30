@@ -2,6 +2,9 @@
 
 2. Use AOS
 4. add a small tag to the item to differentiate b/w movie and tv show
+5. add event listener to the projects displayed under profile of a person just like did in season
+6. Shift all season to bottom in the detail view
+7. Add get similar media feature 
 
 - search results 
       - multi 

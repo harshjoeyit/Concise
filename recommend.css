@@ -48,6 +48,10 @@ a {
       margin: 15px 15px 0;
 }
 
+.item:hover {
+      cursor: pointer;
+}
+
 .item, .genre-form, .year-form {
       margin-bottom: 50px;
       border: 1px solid #292c2f;
@@ -108,7 +112,7 @@ img {
       display: none;
 }
 
-.known-for {
+.known-for, .seasons, .episodes{
       padding-top: 20px;
       display: flex;
       justify-content: center;
@@ -116,14 +120,20 @@ img {
       flex-wrap: wrap;
 }
 
-.project {
+.project, .season, .episode{
       max-width: 60px;
       width: 60px;
       word-wrap: break-word;
       padding: 5px;
+      cursor: pointer;
+      transition: 0.3s;
 }
 
-.project p {
+.project:hover, .season:hover, .episode:hover {
+      transform: scale(1.15);
+}
+
+.project p, .season p, .episode p{
       font-size: 0.7rem;
       text-align: center;
 }
@@ -243,7 +253,7 @@ footer button:hover {
             align-items: center;
             flex-direction: column;
       }
-      .project {
+      .project{
             max-width: 90px;
             width: 90px;
             word-wrap: break-word;

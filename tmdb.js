@@ -135,8 +135,8 @@ function constructHTMLStr(element, media) {
       item_str = "";
       if (media === "multi") {
             media = element.media_type;
-      
       } 
+      
       if (media === "movie") {
             item_str = "<div class='item movie' id=" + element.id + ">";
             item_str += "<div class='poster'>";
