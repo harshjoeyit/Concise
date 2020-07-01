@@ -36,12 +36,17 @@ addListenerForSearchLinks(searchLinks[1].firstChild, "movie");
 addListenerForSearchLinks(searchLinks[2].firstChild, "tv");
 addListenerForSearchLinks(searchLinks[3].firstChild, "person");
 
+searchInput.addEventListener('keyup', function(event) {
+      if(event.keyCode === 13) {
+            searchBtn.click();
+      }
+});
 
 searchBtn.addEventListener('click', function() {
       var inputVal = searchInput.value;
       // add Input validation - regex 
       if(inputVal === "") {
-            return;
+            alert("input box was left empty!");
       } else {
             finalSearchLocation = searchResultLocation + inputVal.trim().split(' ').join('+') + "=1";
             window.location.assign(finalSearchLocation);

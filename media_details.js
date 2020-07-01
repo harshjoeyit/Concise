@@ -12,9 +12,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
             if (results.childElementCount > 0) {
                   loader.style.display = 'none';
                   clearInterval(x);
-                  if (tokens[1] === "select-genres" || tokens[1] === "select-year") {
-                        addListenerToSubmitButton();
-                  }
             } else {
                   loader.style.display = 'block';
             }
@@ -58,6 +55,9 @@ function getMediaDetails() {
             if (detailMedia === "tv") {
                   addEventListenerToSeasons();
             }
+            if(detailMedia === "tv" || detailMedia === "movie") {
+                  addEventListenerToSimilarBtn();
+            }
       });
 }
 
@@ -73,6 +73,14 @@ function addEventListenerToSeasons() {
                   window.location.assign('media_details.html?tv_season&' + mediaId + '&' + this.id);
             });
       }
+}
+
+// listener for similar media 
+function addEventListenerToSimilarBtn() {
+      var simBtn = document.querySelector('.extra-info p button');
+      simBtn.addEventListener('click', function() {
+            window.location.assign('similar_media.html?' + detailMedia + '&' + mediaId + '&1');
+      });
 }
 
 function constructMediaDetailsHTMLStr(element) {
@@ -98,6 +106,10 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "<span><i style='color: #ff8c12' class='fa fa-clock-o'></i>" + element.runtime + " min</span>";
             item_str += "<span><i style='color: #4fcf00' class='fa fa-thumbs-up'></i>" + element.popularity * 1000 + "</span>";
             item_str += "</div>";
+            item_str += "<div>";
+            item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
+            item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
+            item_str += "</div>";
             item_str += "</div>";
             item_str += "<div class='extra-info'>";
             item_str += "<p style='padding: 10px 0'><i style='color: #968462' class='fa fa-video-camera' aria-hidden='true'></i>";
@@ -106,13 +118,10 @@ function constructMediaDetailsHTMLStr(element) {
             }).join(', ');
             item_str += "</p>";
             item_str += "<p>" + element.overview + "</p>";
-            item_str += "<div style='padding: 10px 0'>";
-            item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
-            item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
-            item_str += "</div>";
             if (element.homepage) {
-                  item_str += "<p><a href=" + element.homepage + " target='new'>" + element.homepage + "</p>";
+                  item_str += "<p><a href=" + element.homepage + " target='new'>" + element.homepage + "</a></p>";
             }
+            item_str += "<p style='padding-top: 15px'><button>Similar Movies</button></p>";
             item_str += "</div>";
             item_str += "</div>";
             item_str += "</div>";
@@ -139,6 +148,10 @@ function constructMediaDetailsHTMLStr(element) {
             }).join(' min, ');
             item_str += "<span><i style='color: #ff8c12' class='fa fa-clock-o'></i>" + runtimes + " min</span>";
             item_str += "<span><i style='color: #4fcf00' class='fa fa-thumbs-up'></i>" + element.popularity * 1000 + "</span>";
+            item_str += "</div>";
+            item_str += "<div>";
+            item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
+            item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
             item_str += "</div>";
             var createdBy = element.created_by.map(el => {
                   return el.name;
@@ -170,14 +183,10 @@ function constructMediaDetailsHTMLStr(element) {
                   item_str += season_str;
             });;
             item_str += "</div>";
-            item_str += "<div>";
-            item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
-            item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
-            item_str += "</div>";
-
             if (element.homepage) {
-                  item_str += "<p style='padding-top: 10px'><a href=" + element.homepage + " target='new'>" + element.homepage + "</p>";
+                  item_str += "<p style='padding-top: 10px'><a href=" + element.homepage + " target='new'>" + element.homepage + "</a></p>";
             }
+            item_str += "<p style='padding-top: 15px;'><button>Similar TV Showes</button></p>";
             item_str += "</div>";
             item_str += "</div>";
             item_str += "</div>";
@@ -206,7 +215,7 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "<div class='extra-info'>";
             item_str += "<p style='padding: 10px'>" + element.biography + "</p>"
             if (element.homepage) {
-                  item_str += "<p><a href=" + element.homepage + " target='new'>" + element.homepage + "</p>";
+                  item_str += "<p><a href=" + element.homepage + " target='new'>" + element.homepage + "</a></p>";
             }
             item_str += "</div>";
             item_str += "</div>";
@@ -236,7 +245,7 @@ function constructMediaDetailsHTMLStr(element) {
                   } else {
                         proj_str += "<img src=https://image.tmdb.org/t/p/w300" + project.still_path + " alt='poster' >";
                   }
-                        proj_str += "<p>" + project.name + "</p>";
+                  proj_str += "<p>" + project.name + "</p>";
                   proj_str += "</div>";
                   item_str += proj_str;
             });

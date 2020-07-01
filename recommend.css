@@ -49,14 +49,20 @@ a {
 }
 
 .item:hover {
+      box-shadow: 3px 5px 6px 2px rgb(138, 137, 137);
       cursor: pointer;
+}
+
+.item:active {
+      box-shadow: none;
 }
 
 .item, .genre-form, .year-form {
       margin-bottom: 50px;
-      border: 1px solid #292c2f;
+      box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
       border-radius: 5px;
       padding: 10px;
+      transition: 0.3s;
 }
 
 .item>div * {
@@ -185,7 +191,7 @@ footer button:hover {
       margin-bottom: 10px;
 }
 
-.genre-form .submit-genres>button, .year-form>button{
+.genre-form .submit-genres>button, .year-form>button, .extra-info p button {
       padding: 10px 15px;
 	font-size: 15px;
 	border-radius: 3px;
@@ -197,13 +203,13 @@ footer button:hover {
 	transition: 0.1s;
 }
 
-.genre-form .submit-genres>button:hover, .year-form>button:hover{
+.genre-form .submit-genres>button:hover, .year-form>button:hover, .extra-info p button:hover{
       color: #292c2f;
 	background-color: white;
 	box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
 }
 
-.genre-form .submit-genres>button:active, .year-form>button:active {
+.genre-form .submit-genres>button:active, .year-form>button:active, .extra-info p button:active {
       transform: scale(0.95);
 }
 
@@ -259,8 +265,11 @@ footer button:hover {
             word-wrap: break-word;
             padding: 5px;
       }
+      .main-info {
+            width: 100%;
+      }
       .main-info>div {
-            width: 400px;
+            width: 100%;
       }
 
       .genre-form {

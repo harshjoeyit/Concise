@@ -5,6 +5,7 @@
 5. add event listener to the projects displayed under profile of a person just like did in season
 6. Shift all season to bottom in the detail view
 7. Add get similar media feature 
+8. language is undefined on the details page 
 
 - search results 
       - multi 

@@ -116,20 +116,6 @@ function getSearchString(media) {
       return keywords.join("+");
 }
 
-// this option is visible of the detail page of a movie/tv show
-function getSimilarMedia(media, id) {
-      query_url = getQueryUrl("/" + media + "/" + id + "/similar")([orderby.popularity]);
-      if (media === "movie") {
-            fetchData(query_url, displayMovieSearch);
-      } else if (media === "tv") {
-            fetchData(query_url, displayTvSearch);
-      }
-}
-// getSimilarMedia("movie", 1726);
-// getSimilarMedia("tv", 1399);
-
-
-
 // constructs html string for particular media with a given media 
 function constructHTMLStr(element, media) {
       item_str = "";
@@ -181,7 +167,7 @@ function constructHTMLStr(element, media) {
             item_str += "<div class='main-info'>";
             item_str += "<h2>" + element.name + "</h2>";
             item_str += "<div>";
-            item_str += "<span><i style='color: #5C7D76' class='fa fa-calendar'></i>" + element.first_air_date + "</span>";
+            item_str += "<span><i style='color: #742ce8' class='fa fa-calendar'></i>" + element.first_air_date + "</span>";
             item_str += "<span><i style='color: #0380A3' class='fa fa-language'></i>" + languages[element.original_language] + "</span>";
             item_str += "</div>";
             genres = element.genre_ids.map(function (id) {
@@ -218,7 +204,7 @@ function constructHTMLStr(element, media) {
             item_str += "</div>";
             item_str += "<div class='known-for'>";
             element.known_for.forEach(project => {
-                  var proj_str = "<div class='project'>";
+                  var proj_str = "<div class='project " + project.media_type + "' id=" + project.id + ">";
                   if (project.poster_path == null) {
                         proj_str += "<img src=./images/media.png alt='poster'>"
                   } else {
@@ -240,6 +226,7 @@ function constructHTMLStr(element, media) {
       return item_str;
 }
 
+// listener for detail of media
 function addEventListenerToItems () {
       var movieItems = document.querySelectorAll('.movie');
       var tvItems = document.querySelectorAll('.tv');

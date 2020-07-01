@@ -190,6 +190,12 @@ function addListenerToSubmitButton() {
             var yearFormBtn = document.querySelector('.year-form button');
             var yearFormInput = document.querySelector('.year-form input');
 
+            yearFormInput.addEventListener('keyup', function(event) {
+                  if(event.keyCode === 13) {
+                        yearFormBtn.click();
+                  }
+            });
+
             yearFormBtn.addEventListener('click', function() {
                   var inputVal = yearFormInput.value;
                   if(inputVal === "") {
