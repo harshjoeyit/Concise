@@ -231,7 +231,16 @@ function addEventListenerToItems () {
       var movieItems = document.querySelectorAll('.movie');
       var tvItems = document.querySelectorAll('.tv');
       var personItems = document.querySelectorAll('.person');
-      
+      var project = document.querySelectorAll('.project');
+
+      // for movies listed on person item
+      project.forEach(element => { 
+            element.addEventListener('click', function(event) {
+                  event.stopPropagation();
+                  window.location.assign('media_details.html?movie&' + element.id);
+            });
+      });
+
       movieItems.forEach(element => {
             element.addEventListener('click', function () {
                   window.location.assign('media_details.html?movie&' + element.id);
