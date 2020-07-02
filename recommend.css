@@ -7,7 +7,6 @@ body {
 header {
       background-color: #292c2f;
       padding: 5px 0;
-      /* position: fixed; */
       width: 100%;
 }
 
@@ -34,7 +33,6 @@ a {
 }
 
 .main-content {
-      /* z-index: -1; */
       padding: 10px;
 }
 
@@ -213,6 +211,12 @@ footer button:hover {
       transform: scale(0.95);
 }
 
+.extra-info>p>button {
+      margin:2px 2px;
+      padding: 8px 10px;
+}
+
+
 .year-form {
       display: flex;
       justify-content: center;
@@ -272,6 +276,10 @@ footer button:hover {
             width: 100%;
       }
 
+      .extra-info>p>button {
+            margin: 2px 6px;
+      }
+
       .genre-form {
             width: 35vw;
             margin: auto;
@@ -306,6 +314,10 @@ footer button:hover {
             width: 110px;
             word-wrap: break-word;
             padding: 5px;
+      }
+
+      .extra-info>p>button {
+            margin: 5px 10px;
       }
 
       .genre-form {

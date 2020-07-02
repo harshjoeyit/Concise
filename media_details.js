@@ -3,6 +3,7 @@ var tokens;
 var detailMedia;
 var mediaId;
 var seasonId;
+var action;
 
 window.addEventListener('DOMContentLoaded', (event) => {
       // using a loader 
@@ -46,23 +47,65 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 function getMediaDetails() {
       if (detailMedia === "tv_season") {
-            query_url = getQueryUrl("/tv/" + mediaId + "/season/" + seasonId)([]);
+            action = "/tv/" + mediaId + "/season/" + seasonId;
       } else {
-            query_url = getQueryUrl("/" + detailMedia + "/" + mediaId)([]);
+            action = "/" + detailMedia + "/" + mediaId;
       }
+      query_url = getQueryUrl(action)([]);
       fetchData(query_url, function (data) {
             parent.innerHTML = constructMediaDetailsHTMLStr(data);
             if (detailMedia === "tv") {
                   addEventListenerToSeasons();
             }
-            if(detailMedia === "tv" || detailMedia === "movie") {
-                  addEventListenerToSimilarBtn();
+            addEventListenerToButtons();
+      });
+}
+
+function getImages() {
+      getQueryUrl(action + "/images")(["include_image_language=en"]);
+      fetchData(query_url, function (data) {
+            var lastDetailBox = document.querySelector('.item').lastChild;
+            var img_str = "";
+            // conditions
+            if (data.posters != undefined) {
+                  data.posters.forEach(element => {
+                        img_str += constructHTMLForImage(element, "poster");
+                  });
+            }
+            if (data.profiles != undefined) {
+                  data.profiles.forEach(element => {
+                        img_str += constructHTMLForImage(element, "profiles");
+                  })
+            }
+
+            if (img_str === "") {
+                  lastDetailBox.innerHTML = "<h2 style='text-align: center'>No videos found</h2>";
+            } else {
+                  lastDetailBox.innerHTML = "<div class='media-image-box'>" + img_str + "</div>";
             }
       });
 }
 
-function noResults() {
-      document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">Page not found!</h1>';
+function getVideos() {
+      getQueryUrl(action + "/videos")([]);
+      fetchData(query_url, function (data) {
+            console.log(data);
+            var lastDetailBox = document.querySelector('.item').lastChild;
+            var video_str = "";
+
+            if (data.results != undefined) {
+                  data.results.forEach(element => {
+                        video_str += constructHTMLForVideo(element);
+                  });
+            }
+
+            if (video_str === "") {
+                  lastDetailBox.innerHTML = "<h2 style='text-align: center'>No videos found</h2>";
+            } else {
+                  lastDetailBox.innerHTML = "<div class='media-video-box'>" + video_str + "</div>";
+                  addEventListenerToVideos();
+            }
+      });
 }
 
 // to display season details add listener 
@@ -76,17 +119,48 @@ function addEventListenerToSeasons() {
 }
 
 // listener for similar media 
-function addEventListenerToSimilarBtn() {
-      var simBtn = document.querySelector('.extra-info p button');
-      simBtn.addEventListener('click', function() {
-            window.location.assign('similar_media.html?' + detailMedia + '&' + mediaId + '&1');
+function addEventListenerToButtons() {
+      var btns = document.querySelectorAll('.button-box button');
+      for (var i = 0; i < btns.length; i++) {
+            if (btns[i].id === 'similar') {
+                  btns[i].addEventListener('click', function () {
+                        window.location.assign('similar_media.html?' + detailMedia + '&' + mediaId + '&1');
+                  });
+            } else if (btns[i].id === 'images') {
+                  btns[i].addEventListener('click', function () {
+                        getImages();
+                  });
+            } else if (btns[i].id === 'videos') {
+                  btns[i].addEventListener('click', function () {
+                        getVideos();
+                  });
+            }
+      }
+}
+
+// click to open youtube video
+function addEventListenerToVideos() {
+      var videos = document.querySelectorAll('.media-video');
+      videos.forEach(element => {
+            element.addEventListener('click', function () {
+                  if (confirm("Do you want to proceed to Youtube?")) {
+                        var url = "https://www.youtube.com/watch?v=" + element.id;
+                        var win = window.open(url, '_blank');
+                        win.focus();
+                  }
+            });
       });
+}
+
+function noResults() {
+      document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">Page not found!</h1>';
 }
 
 function constructMediaDetailsHTMLStr(element) {
       item_str = "";
       if (detailMedia === "movie") {
             item_str = "<div class='item movie' id=" + element.id + ">";
+            item_str += "<div class='detail-box'>";
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
                   item_str += "<img src=./images/media.png alt='poster'>"
@@ -95,23 +169,24 @@ function constructMediaDetailsHTMLStr(element) {
             }
             item_str += "</div>";
             item_str += "<div class='info'>";
-            item_str += "<div class='main-info'>";
             item_str += "<h2>" + element.title + "</h2>";
-            item_str += "<p style='position: relative; top: -20px'><b>" + element.tagline + "</b></p>"
+            if (element.tagline) {
+                  item_str += "<p style='position: relative; top: -15px; color: grey;'><b>" + element.tagline + "</b></p>";
+            }
             item_str += "<div>";
             item_str += "<span><i style='color: #742ce8' class='fa fa-calendar'></i>" + element.release_date + "</span>";
             item_str += "<span><i style='color: #0380A3' class='fa fa-language'></i>" + languages[element.original_language] + "</span>";
             item_str += "</div>";
             item_str += "<div>";
-            item_str += "<span><i style='color: #ff8c12' class='fa fa-clock-o'></i>" + element.runtime + " min</span>";
+            var runtimeHours = Math.floor(element.runtime / 60);
+            var runtimeMins = element.runtime % 60;
+            item_str += "<span><i style='color: #ff8c12' class='fa fa-clock-o'></i>" + runtimeHours + "h " + (runtimeMins > 0 ? runtimeMins + "m" : "") + "</span>";
             item_str += "<span><i style='color: #4fcf00' class='fa fa-thumbs-up'></i>" + element.popularity * 1000 + "</span>";
             item_str += "</div>";
             item_str += "<div>";
             item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
             item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
             item_str += "</div>";
-            item_str += "</div>";
-            item_str += "<div class='extra-info'>";
             item_str += "<p style='padding: 10px 0'><i style='color: #968462' class='fa fa-video-camera' aria-hidden='true'></i>";
             item_str += element.production_companies.map(el => {
                   return el.name;
@@ -121,13 +196,23 @@ function constructMediaDetailsHTMLStr(element) {
             if (element.homepage) {
                   item_str += "<p><a href=" + element.homepage + " target='new'>" + element.homepage + "</a></p>";
             }
-            item_str += "<p style='padding-top: 15px'><button>Similar Movies</button></p>";
             item_str += "</div>";
+            item_str += "</div>";
+            item_str += "<div class='detail-box'>";
+            item_str += "<p class='button-box' style='padding-top: 15px'>";
+            item_str += "<button id='similar'>Similar Movies</button>";
+            item_str += "<button id='videos'>Videos</button>";;
+            item_str += "<button id='images'>Images</button>";
+            item_str += "</p>";
+            item_str += "</div>";
+
+            item_str += "<div class='detail-box'>";
             item_str += "</div>";
             item_str += "</div>";
 
       } else if (detailMedia === "tv") {
             item_str = "<div class='item tv' id=" + element.id + ">";
+            item_str += "<div class='detail-box'>";
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
                   item_str += "<img src=./images/media.png alt='poster'>"
@@ -136,7 +221,6 @@ function constructMediaDetailsHTMLStr(element) {
             }
             item_str += "</div>";
             item_str += "<div class='info'>";
-            item_str += "<div class='main-info'>";
             item_str += "<h2>" + element.name + "</h2>";
             item_str += "<div>";
             item_str += "<span><i style='color: #870afc' class='fa fa-calendar'></i>" + element.first_air_date + "</span>";
@@ -144,9 +228,18 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "</div>";
             item_str += "<div>";
             var runtimes = element.episode_run_time.map(el => {
-                  return el;
-            }).join(' min, ');
-            item_str += "<span><i style='color: #ff8c12' class='fa fa-clock-o'></i>" + runtimes + " min</span>";
+                  var rTime = "";
+                  var hrs = Math.floor(el / 60);
+                  var mins = el % 60;
+                  if (hrs > 0) {
+                        rTime += hrs + "h ";
+                  }
+                  if (mins > 0) {
+                        rTime += mins + "m ";
+                  }
+                  return rTime;
+            }).join(', ');
+            item_str += "<span><i style='color: #ff8c12' class='fa fa-clock-o'></i>" + runtimes + "</span>";
             item_str += "<span><i style='color: #4fcf00' class='fa fa-thumbs-up'></i>" + element.popularity * 1000 + "</span>";
             item_str += "</div>";
             item_str += "<div>";
@@ -165,34 +258,43 @@ function constructMediaDetailsHTMLStr(element) {
                   return el.name;
             }).join(', ');
             item_str += "<p><i style='color: #968462' class='fa fa-video-camera' aria-hidden='true'></i>" + productionComps + "</p>";
-            item_str += "</div>";
-
-            item_str += "<div class='extra-info' style='padding-top: 10px'>";
             item_str += "<p>" + element.overview + "</p>";
-            // season details
-            item_str += "<div class='seasons' style='justify-content: center; margin-bottom: 10px'>";
+            if (element.homepage) {
+                  item_str += "<p style='padding-top: 10px; flex: 100%'><a href=" + element.homepage + " target='new'>" + element.homepage + "</a></p>";
+            }
+            item_str += "</div>";
+            // detail box ends
+            item_str += '</div>';
+
+            // season details and other details
+            item_str += "<div class='detail-box'>";
+            item_str += "<div class='seasons-box'>";
             element.seasons.forEach(season => {
                   var season_str = "<div class='season' id=" + season.season_number + ">";
                   if (season.poster_path == null) {
                         season_str += "<img src=./images/media.png alt='poster'>";
                   } else {
-                        season_str += "<img src=https://image.tmdb.org/t/p/w300" + season.poster_path + " alt='poster' >";
+                        season_str += "<img src=https://image.tmdb.org/t/p/w154" + season.poster_path + " alt='poster' >";
                   }
                   season_str += "<p>" + season.name + "</p>";
                   season_str += "</div>";
                   item_str += season_str;
             });;
             item_str += "</div>";
-            if (element.homepage) {
-                  item_str += "<p style='padding-top: 10px'><a href=" + element.homepage + " target='new'>" + element.homepage + "</a></p>";
-            }
-            item_str += "<p style='padding-top: 15px;'><button>Similar TV Showes</button></p>";
+            item_str += "<p class='button-box' style='padding-top: 15px; flex: 100%'>";
+            item_str += "<button id='similar'>Similar Shows</button>";
+            item_str += "<button id='videos'>Videos</button>";
+            item_str += "<button id='images'>Images</button>";
+            item_str += "</p>";
             item_str += "</div>";
+
+            item_str += "<div class='detail-box'>";
             item_str += "</div>";
             item_str += "</div>";
 
       } else if (detailMedia === "person") {
             item_str = "<div class='item'>";
+            item_str += "<div class='detail-box'>";
             item_str += "<div class='poster'>";
             if (element.profile_path == null) {
                   item_str += "<img src=./images/user.png alt='poster'>"
@@ -201,7 +303,6 @@ function constructMediaDetailsHTMLStr(element) {
             }
             item_str += "</div>";
             item_str += "<div class='info'>";
-            item_str += "<div class='main-info'>";
             item_str += "<h2>" + element.name + "</h2>";
             item_str += "<div>";
             item_str += "<span><i style='color: #1295FF' class='fa fa-dot-circle-o'></i>" + element.known_for_department + "</span>";
@@ -211,19 +312,24 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "<span><i style='color: #ff4599' class='fa fa-birthday-cake'></i>" + element.birthday + "</span>";
             item_str += "<span><i style='color: #e61700' class='fa fa-map-marker'></i>" + element.place_of_birth + "</span>";
             item_str += "</div>";
-            item_str += "</div>";
-            item_str += "<div class='extra-info'>";
             item_str += "<p style='padding: 10px'>" + element.biography + "</p>"
             if (element.homepage) {
                   item_str += "<p><a href=" + element.homepage + " target='new'>" + element.homepage + "</a></p>";
             }
             item_str += "</div>";
             item_str += "</div>";
+            item_str += "<div class='detail-box'>";
+            item_str += "<p class='button-box' style='padding-top: 15px'>";
+            item_str += "<button id='images'>Images</button>";
+            item_str += "</p>";
+            item_str += "</div>";
+            item_str += "<div class='detail-box'>";
+            item_str += "</div>";
             item_str += "</div>";
 
       } else if (detailMedia === "tv_season") {
-            console.log(element);
             item_str = "<div class='item'>";
+            item_str += "<div class='detail-box'>"
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
                   item_str += "<img src=./images/user.png alt='poster'>"
@@ -232,26 +338,54 @@ function constructMediaDetailsHTMLStr(element) {
             }
             item_str += "</div>";
             item_str += "<div class='info'>";
-            item_str += "<div class='main-info'>";
             item_str += "<h2>" + element.name + "</h2>";
             item_str += "<p>" + element.overview + "</p>"
             item_str += "</div>";
-            item_str += "<div class='extra-info'>";
-            item_str += "<div class='episodes' style='justify-content: center; align-items: start'>";
+            item_str += "</div>";
+            item_str += "<div class='detail-box'>";
+            item_str += "<div class='seasons-box'>";
             element.episodes.forEach(project => {
                   var proj_str = "<div class='episode'>";
                   if (project.still_path == null) {
                         proj_str += "<img src=./images/media.png alt='poster'>"
                   } else {
-                        proj_str += "<img src=https://image.tmdb.org/t/p/w300" + project.still_path + " alt='poster' >";
+                        proj_str += "<img src=https://image.tmdb.org/t/p/w185" + project.still_path + " alt='poster' >";
                   }
                   proj_str += "<p>" + project.name + "</p>";
                   proj_str += "</div>";
                   item_str += proj_str;
             });
             item_str += "</div>";
+            item_str += "<p class='button-box' style='padding-top: 15px'>";
+            item_str += "<button id='videos'>Videos</button>";;
+            item_str += "<button id='images'>Images</button>";
+            item_str += "</p>";
             item_str += "</div>";
+
+            item_str += "<div class='detail-box'>";
             item_str += "</div>";
+            item_str += "<div>";
       }
+      return item_str;
+}
+
+function constructHTMLForImage(element, type) {
+      var sz = "original";
+      if (type == "poster") {
+            sz = "w342";
+      } else if ("profiles") {
+            sz = "h632";
+      }
+      var item_str = "<div class='media-image'>";
+      item_str += "<img src=https://image.tmdb.org/t/p/" + sz + element.file_path + " alt='poster' >";
+      item_str += "</div>";
+      return item_str;
+}
+
+function constructHTMLForVideo(element) {
+      var item_str = "<div class='media-video' id=" + element.key + ">";
+      item_str += "<img src=https://img.youtube.com/vi/" + element.key + "/mqdefault.jpg alt='thumbnail'>";
+      item_str += "<p>" + element.name + "</p>";
+      item_str += "</div>";
       return item_str;
 }
