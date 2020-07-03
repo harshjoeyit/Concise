@@ -293,7 +293,7 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "<div class='detail-box'>";
             item_str += "<div class='seasons-box'>";
             element.seasons.forEach(season => {
-                  var season_str = "<div data-aos='flip-down' class='season' id=" + season.season_number + ">";
+                  var season_str = "<div class='season' id=" + season.season_number + ">";
                   if (season.poster_path == null) {
                         season_str += "<img src=./images/media.png alt='poster'>";
                   } else {
