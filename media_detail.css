@@ -14,7 +14,7 @@ header {
       width: 100%;
 }
 
-a {
+* {
       -webkit-tap-highlight-color: transparent;
 }
 
@@ -99,6 +99,11 @@ a {
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
+      border-radius: 5px;
+}
+
+.detail-box:nth-child(1) {
+      background: linear-gradient(to bottom , rgb(231, 231, 231), white);
 }
 
 .detail-box>p {
@@ -148,6 +153,32 @@ img {
       justify-content: center;
       align-items: center;
       flex-direction: column;
+}
+
+.info>* {
+      width: 100%;
+}
+
+.info>h2 {
+      text-align: center;
+      padding: 5px 0 10px;
+}
+
+.info>div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.info>div>span {
+      width: 100%;
+      text-align: center;
+      margin: 5px 0;
+}
+
+.info>p {
+      margin: 8px 0;
+      text-align: center; 
 }
 
 .seasons-box {
@@ -200,7 +231,7 @@ img {
 .media-image {
       margin: 0;
       width: 130px;
-      padding: 5px;
+      padding: 5px 5px 0 5px;
       transition: 0.3s;
 }
 
@@ -210,11 +241,7 @@ img {
       align-items: center;
       flex: 100%; 
       padding: 5px;
-      transition: 0.3s;
-}
-
-.media-video:hover {
-      transform: scale(1.02);
+      transition: 0.4s;
 }
 
 .media-image:hover {
@@ -228,32 +255,6 @@ img {
 
 .media-video>p {
       border-bottom: 1px solid #616161;
-}
-
-.info>* {
-      width: 100%;
-}
-
-.info>h2 {
-      text-align: center;
-      padding: 5px 0 10px;
-}
-
-.info>div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-}
-
-.info>div>span {
-      width: 100%;
-      text-align: center;
-      margin: 5px 0;
-}
-
-.info>p {
-      margin: 8px 0;
-      text-align: center; 
 }
 
 .result i.fa {

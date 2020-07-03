@@ -1,3 +1,7 @@
+* {
+      box-sizing: border-box;
+}
+
 body {
       margin: 0;
       padding: 0;
@@ -10,9 +14,7 @@ header {
       width: 100%;
 }
 
-/* stops the blue highlight on tap/click */
-
-a {
+* {
       -webkit-tap-highlight-color: transparent;
 }
 
@@ -32,6 +34,28 @@ a {
       background-color: #181a1b;
 }
 
+.loader {
+      border: 10px solid #f3f3f3;
+      /* Light grey */
+      border-top: 10px solid #292c2f;
+      /* Blue */
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1.2s linear infinite;
+      margin: 30vh auto;
+      display: none;
+}
+
+@keyframes spin {
+      0% {
+            transform: rotate(0deg);
+      }
+      100% {
+            transform: rotate(360deg);
+      }
+}
+
 .main-content {
       padding: 10px;
 }
@@ -46,21 +70,22 @@ a {
       margin: 15px 15px 0;
 }
 
-.item:hover {
+.item, .genre-form, .year-form {
+      margin-bottom: 50px;
       box-shadow: 3px 5px 6px 2px rgb(138, 137, 137);
+      border-radius: 5px;
+      padding: 10px;
+      transition: 0.3s;
+      background: linear-gradient(to bottom, rgb(231, 231, 231), white);
+}
+
+.item:hover, .genre-form:hover, .year-form:hover {
+      box-shadow: 1px 4px 5px 1px rgb(194, 191, 191);
       cursor: pointer;
 }
 
 .item:active {
       box-shadow: none;
-}
-
-.item, .genre-form, .year-form {
-      margin-bottom: 50px;
-      box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
-      border-radius: 5px;
-      padding: 10px;
-      transition: 0.3s;
 }
 
 .item>div * {
@@ -103,20 +128,7 @@ img {
       margin: 5px;
 }
 
-.loader {
-      border: 10px solid #f3f3f3;
-      /* Light grey */
-      border-top: 10px solid #292c2f;
-      /* Blue */
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1.2s linear infinite;
-      margin: 30vh auto;
-      display: none;
-}
-
-.known-for, .seasons, .episodes{
+.known-for{
       padding-top: 20px;
       display: flex;
       justify-content: center;
@@ -124,7 +136,7 @@ img {
       flex-wrap: wrap;
 }
 
-.project, .season, .episode{
+.project{
       max-width: 60px;
       width: 60px;
       word-wrap: break-word;
@@ -133,11 +145,11 @@ img {
       transition: 0.3s;
 }
 
-.project:hover, .season:hover, .episode:hover {
+.project:hover{
       transform: scale(1.15);
 }
 
-.project p, .season p, .episode p{
+.project p{
       font-size: 0.7rem;
       text-align: center;
 }
@@ -173,15 +185,6 @@ footer span {
 footer button:hover {
       background-color: white;
       color: tomato;
-}
-
-@keyframes spin {
-      0% {
-            transform: rotate(0deg);
-      }
-      100% {
-            transform: rotate(360deg);
-      }
 }
 
 .genre-form .submit-genres {
@@ -308,12 +311,6 @@ footer button:hover {
             justify-content: center;
             align-items: center;
             flex-direction: column;
-      }
-      .project {
-            max-width: 110px;
-            width: 110px;
-            word-wrap: break-word;
-            padding: 5px;
       }
 
       .extra-info>p>button {

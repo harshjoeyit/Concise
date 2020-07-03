@@ -79,7 +79,7 @@ function getImages() {
             }
 
             if (img_str === "") {
-                  lastDetailBox.innerHTML = "<h2 style='text-align: center'>No videos found</h2>";
+                  lastDetailBox.innerHTML = "<h2 style='text-align: center'>No images found</h2>";
             } else {
                   lastDetailBox.innerHTML = "<div class='media-image-box'>" + img_str + "</div>";
             }
@@ -89,7 +89,6 @@ function getImages() {
 function getVideos() {
       getQueryUrl(action + "/videos")([]);
       fetchData(query_url, function (data) {
-            console.log(data);
             var lastDetailBox = document.querySelector('.item').lastChild;
             var video_str = "";
 
@@ -121,6 +120,7 @@ function addEventListenerToSeasons() {
 // listener for similar media 
 function addEventListenerToButtons() {
       var btns = document.querySelectorAll('.button-box button');
+
       for (var i = 0; i < btns.length; i++) {
             if (btns[i].id === 'similar') {
                   btns[i].addEventListener('click', function () {
@@ -128,14 +128,30 @@ function addEventListenerToButtons() {
                   });
             } else if (btns[i].id === 'images') {
                   btns[i].addEventListener('click', function () {
+                        addLoader2();
                         getImages();
                   });
             } else if (btns[i].id === 'videos') {
                   btns[i].addEventListener('click', function () {
+                        addLoader2();
                         getVideos();
                   });
             }
       }
+}
+
+function addLoader2() {
+      var lastDetailBox = document.querySelector('.item').lastChild;
+      lastDetailBox.innerHTML = "<div id='loader2' class='loader'></div>";
+      var loader2 = document.querySelectorAll('.loader')[1];
+      var x = setInterval(function () {
+            if (lastDetailBox.firstChild.id != "loader2") {
+                  loader2.style.display = 'none';
+                  clearInterval(x);
+            } else {
+                  loader2.style.display = 'block';
+            }
+      }, 100);
 }
 
 // click to open youtube video
@@ -148,6 +164,13 @@ function addEventListenerToVideos() {
                         var win = window.open(url, '_blank');
                         win.focus();
                   }
+            });
+            var ytScr = element.firstChild.src;
+            element.addEventListener('mouseenter', function() {
+                  element.firstChild.src = './images/youtube-logo.png';
+            });
+            element.addEventListener('mouseleave', function() {
+                  element.firstChild.src = ytScr;
             });
       });
 }
@@ -169,7 +192,7 @@ function constructMediaDetailsHTMLStr(element) {
             }
             item_str += "</div>";
             item_str += "<div class='info'>";
-            item_str += "<h2>" + element.title + "</h2>";
+            item_str += "<h2>" + element.title + " (" + element.release_date.substring(0, 4) + ")" + "</h2>";
             if (element.tagline) {
                   item_str += "<p style='position: relative; top: -15px; color: grey;'><b>" + element.tagline + "</b></p>";
             }
@@ -181,7 +204,7 @@ function constructMediaDetailsHTMLStr(element) {
             var runtimeHours = Math.floor(element.runtime / 60);
             var runtimeMins = element.runtime % 60;
             item_str += "<span><i style='color: #ff8c12' class='fa fa-clock-o'></i>" + runtimeHours + "h " + (runtimeMins > 0 ? runtimeMins + "m" : "") + "</span>";
-            item_str += "<span><i style='color: #4fcf00' class='fa fa-thumbs-up'></i>" + element.popularity * 1000 + "</span>";
+            item_str += "<span><i style='color: #4fcf00' class='fa fa-thumbs-up'></i>" + Math.floor(element.popularity * 1000) + "</span>";
             item_str += "</div>";
             item_str += "<div>";
             item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
@@ -221,7 +244,7 @@ function constructMediaDetailsHTMLStr(element) {
             }
             item_str += "</div>";
             item_str += "<div class='info'>";
-            item_str += "<h2>" + element.name + "</h2>";
+            item_str += "<h2>" + element.name + " (" + element.first_air_date.substring(0, 4) + ")" + "</h2>";
             item_str += "<div>";
             item_str += "<span><i style='color: #870afc' class='fa fa-calendar'></i>" + element.first_air_date + "</span>";
             item_str += "<span><i style='color: #0380A3' class='fa fa-language'></i>" + languages[element.original_language] + "</span>";
@@ -240,7 +263,7 @@ function constructMediaDetailsHTMLStr(element) {
                   return rTime;
             }).join(', ');
             item_str += "<span><i style='color: #ff8c12' class='fa fa-clock-o'></i>" + runtimes + "</span>";
-            item_str += "<span><i style='color: #4fcf00' class='fa fa-thumbs-up'></i>" + element.popularity * 1000 + "</span>";
+            item_str += "<span><i style='color: #4fcf00' class='fa fa-thumbs-up'></i>" + Math.floor(element.popularity * 1000) + "</span>";
             item_str += "</div>";
             item_str += "<div>";
             item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
@@ -270,7 +293,7 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "<div class='detail-box'>";
             item_str += "<div class='seasons-box'>";
             element.seasons.forEach(season => {
-                  var season_str = "<div class='season' id=" + season.season_number + ">";
+                  var season_str = "<div data-aos='flip-down' class='season' id=" + season.season_number + ">";
                   if (season.poster_path == null) {
                         season_str += "<img src=./images/media.png alt='poster'>";
                   } else {
@@ -306,7 +329,7 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "<h2>" + element.name + "</h2>";
             item_str += "<div>";
             item_str += "<span><i style='color: #1295FF' class='fa fa-dot-circle-o'></i>" + element.known_for_department + "</span>";
-            item_str += "<span><i style='color: #AE3FFF' class='fa fa-thumbs-up'></i>" + element.popularity * 1000 + "</span>";
+            item_str += "<span><i style='color: #AE3FFF' class='fa fa-thumbs-up'></i>" + Math.floor(element.popularity * 1000) + "</span>";
             item_str += "</div>";
             item_str += "<div>";
             item_str += "<span><i style='color: #ff4599' class='fa fa-birthday-cake'></i>" + element.birthday + "</span>";
@@ -338,14 +361,14 @@ function constructMediaDetailsHTMLStr(element) {
             }
             item_str += "</div>";
             item_str += "<div class='info'>";
-            item_str += "<h2>" + element.name + "</h2>";
+            item_str += "<h2>" + element.name + " (" + element.air_date.substring(0, 4) + ")" + "</h2>";
             item_str += "<p>" + element.overview + "</p>"
             item_str += "</div>";
             item_str += "</div>";
             item_str += "<div class='detail-box'>";
             item_str += "<div class='seasons-box'>";
             element.episodes.forEach(project => {
-                  var proj_str = "<div class='episode'>";
+                  var proj_str = "<div data-aos='flip-down' class='episode'>";
                   if (project.still_path == null) {
                         proj_str += "<img src=./images/media.png alt='poster'>"
                   } else {
@@ -364,7 +387,6 @@ function constructMediaDetailsHTMLStr(element) {
 
             item_str += "<div class='detail-box'>";
             item_str += "</div>";
-            item_str += "<div>";
       }
       return item_str;
 }
