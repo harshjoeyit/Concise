@@ -1,19 +1,3 @@
-/* for opening up links when the main links are clicked */
-
-var sideBarLinks = document.querySelector('aside div');
-var links = document.querySelectorAll('aside div div');
-
-for (var i = 0; i < links.length; i++) {
-      links[i].addEventListener('click', function () {
-            var curr = document.querySelector('.selected');
-            // if for the consdition since in strting none is selceted so - curr = null
-            if (curr) {
-                  curr.classList.remove('selected');
-            }
-            this.classList.add('selected');
-      });
-}
-
 /* for controlling the type of search done */
 
 var baseSearchResultLocation = 'search_results.html';

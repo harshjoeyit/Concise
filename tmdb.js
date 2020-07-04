@@ -151,6 +151,9 @@ function constructHTMLStr(element, media) {
             item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
             item_str += "</div>";
             item_str += "</div>";
+            item_str += "<div class='extra-info' style='margin-top: 10px;'>";
+            item_str += "<p><button> More ...</button></p>";
+            item_str += "</div>";
             item_str += "</div>";
             item_str += "</div>";
       
@@ -181,6 +184,9 @@ function constructHTMLStr(element, media) {
             item_str += "<span><i style='color: #FFCB38' class='fa fa-star-o'></i>" + element.vote_average + "</span>";
             item_str += "<span><i style='color: #FE316C'  class='fa fa-heart-o'></i>" + element.vote_count + "</span>";
             item_str += "</div>";
+            item_str += "</div>";
+            item_str += "<div class='extra-info' style='margin-top: 10px;'>";
+            item_str += "<p><button> More ...</button></p>";
             item_str += "</div>";
             item_str += "</div>";
             item_str += "</div>";
@@ -218,6 +224,9 @@ function constructHTMLStr(element, media) {
                   proj_str += "</div>";
                   item_str += proj_str;
             });
+            item_str += "</div>";
+            item_str += "<div class='extra-info' style='margin-top: 10px;'>";
+            item_str += "<p><button> More ...</button></p>";
             item_str += "</div>";
             item_str += "</div>";
             item_str += "</div>";
