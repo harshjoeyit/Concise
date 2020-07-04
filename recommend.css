@@ -8,37 +8,9 @@ body {
       font-family: 'PT Sans', sans-serif;
 }
 
-header {
-      background-color: #292c2f;
-      padding: 5px 0;
-      width: 100%;
-}
-
-* {
-      -webkit-tap-highlight-color: transparent;
-}
-
-.company-logo {
-      display: block;
-      text-decoration: none;
-      font-family: Cookie, cursive;
-      width: 100px;
-      height: 100px;
-      margin: auto;
-      text-align: center;
-      color: white;
-      font-size: 35px;
-      font-weight: normal;
-      line-height: 2.6;
-      border-radius: 50%;
-      background-color: #181a1b;
-}
-
 .loader {
-      border: 10px solid #f3f3f3;
-      /* Light grey */
-      border-top: 10px solid #292c2f;
-      /* Blue */
+      border: 10px solid #1dd3b0;
+      border-top: 10px solid #affc41;
       border-radius: 50%;
       width: 50px;
       height: 50px;
@@ -56,32 +28,36 @@ header {
       }
 }
 
-.main-content {
-      padding: 10px;
-}
 
 .main-content>h2 {
+      color: #086375;
       text-align: center;
       padding: 0;
       margin: 0;
 }
 
 .result {
-      margin: 15px 15px 0;
+      margin: 15px 15px;
 }
 
 .item, .genre-form, .year-form {
+      border-top: 2px solid #affc41;
       margin-bottom: 50px;
-      box-shadow: 3px 5px 6px 2px rgb(138, 137, 137);
+      box-shadow: 3px 5px 6px 2px #08637542;
       border-radius: 5px;
       padding: 10px;
       transition: 0.3s;
-      background: linear-gradient(to bottom, rgb(231, 231, 231), white);
+      color: #086375;
 }
 
 .item:hover, .genre-form:hover, .year-form:hover {
-      box-shadow: 1px 4px 5px 1px rgb(194, 191, 191);
+      box-shadow: 1px 4px 5px 1px #0863751f;
       cursor: pointer;
+}
+
+input[type="checkbox"] {
+      color: #affc41;
+      border: #086375 1px solid;
 }
 
 .item:active {
@@ -156,7 +132,7 @@ img {
 
 footer {
       margin-top: 80px;
-      background-color: #292c2f;
+      background-color: #086375;
       height: 60px;
       width: 100%;
       display: flex;
@@ -171,21 +147,22 @@ footer button {
       color: white;
       outline: none;
       border: none;
-      background-color: tomato;
+      background-color: #086375;
       transition: 0.3s;
 }
 
 footer span {
-      color: white;
+      color: #086375;
+      font-weight: bold;
       padding: 15px 20px;
       border-radius: 50%;
-      background-color: #181a1b;
+      background-color: #affc41;
       margin: 10px;
 }
 
 footer button:hover {
-      background-color: white;
-      color: tomato;
+      background-color: #affc41;
+      color: #086375;
 }
 
 .genre-form .submit-genres {
@@ -197,18 +174,19 @@ footer button:hover {
       padding: 10px 15px;
 	font-size: 15px;
 	border-radius: 3px;
-	border: 1px solid #292c2f;
+	border: none;
 	outline: none;
 	color: white;
-	background-color: #292c2f;
-	box-shadow: 1px 3px 5px 1px rgb(204, 204, 204);
-	transition: 0.1s;
+	background-color: #086375;
+	box-shadow: 1px 3px 5px 1px #08637542;
+      transition: 0.1s;
+      /* font-weight: bold; */
 }
 
 .genre-form .submit-genres>button:hover, .year-form>button:hover, .extra-info p button:hover{
-      color: #292c2f;
-	background-color: white;
-	box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
+      color: #086375;
+      background-color: #affc41;
+	box-shadow: 1px 4px 5px 1px #08637523;
 }
 
 .genre-form .submit-genres>button:active, .year-form>button:active, .extra-info p button:active {
@@ -235,12 +213,12 @@ footer button:hover {
       padding: 10px 15px;
       border-radius: 3px;
       border: none;
-      box-shadow: 1px 3px 5px 1px rgb(204, 204, 204);
+      box-shadow: 1px 3px 5px 1px #08637542;
       font-size: 16px;
       transition: 0.4s;
 }
 .year-form>input:focus {
-      box-shadow: 1px 4px 5px 1px rgb(170, 168, 168);
+      box-shadow: 1px 4px 5px 1px #0863751c;
       outline: none;
 }
 

@@ -1,10 +1,10 @@
 function openNav() {
       // document.getElementById("mynavbar").style.width = "70%";
-      if (document.getElementById("mynavbar").style.width == "60%") {
+      if (document.getElementById("mynavbar").style.width == "100%") {
             document.getElementById("mynavbar").style.width = "0";
             document.querySelector('.selected').click();
       } else {
-            document.getElementById("mynavbar").style.width = "60%";
+            document.getElementById("mynavbar").style.width = "100%";
       }
 }
 /* for opening up links when the main links are clicked */

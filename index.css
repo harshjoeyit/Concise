@@ -1,9 +1,7 @@
 /* The main content */
 
 .main-content {
-      max-width: 80vw;
-      margin: 0 0 0 20vw;
-	background-color: white;
+	padding: 60px 10px 0 10px;
 }
 
 .main-content .forms {

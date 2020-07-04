@@ -1,240 +1,130 @@
 * {
-      box-sizing: border-box;
+      box-sizing: border-box
 }
 
 body {
-      margin: 0;
-      padding: 0;
-      font-family: 'PT Sans', sans-serif;
+      font-family: Verdana, sans-serif;
+      margin: 0
 }
 
-.header {
-      width: 100%;
-      height: 60px;
-      padding: 15px 20px 0 20px;
-      display: flex;
-      justify-content: space-between;
-      background-color: #086375;
+.mySlides {
+      display: none
 }
 
-.header .logo {
-      font-family: Cookie, cursive;
-      font-size: 40px;
-      letter-spacing: 0.05em;
-      color: #AFFC41;
-      border: 2px solid #AFFC41;
+img {
+      vertical-align: middle;
+}
+
+/* Slideshow container */
+
+.slideshow-container {
+      max-width: 300px;
       position: relative;
-      top: -6px;
-      padding: 0 15px 10px 15px;
-      border-radius: 5px;
+      margin: auto;
 }
 
-.header .openbtn {
-      color: #AFFC41;
-      font-size: 25px;
-}
+/* Next & previous buttons */
 
-.header .navbar {
-      margin-top: 60px;
-      height: 100%;
-      width: 0;
-      position: fixed;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      background-color: #086375;
-      overflow-x: hidden;
-      transition: 0.4s;
-}
-
-.header .navbar .closebtn {
-      color: white;     
+.prev, .next {
+      cursor: pointer;
       position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 38px;
-      background: linear-gradient(to bottom right, #AFFC41, #B2FF9E);
-      width: 50px;
-      text-align: center;
-      border-radius: 50%
-}
-
-.navbar .navbar-links {
-      margin: 30px auto;
-}
-
-.navbar-links div>a {
-      display: block;
-      text-decoration: none;
-      margin:  auto 5px auto;
-      padding: 10px 0 10px 5px;
-      background-color: #086375;
-      text-align: left;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
       color: white;
-      font-size: 14px;
       font-weight: bold;
-      line-height: 2;
-      /* border: 1px solid; */
-      border-bottom-width: 2px;
-      border-bottom-style: solid;
-      letter-spacing: 0.08em;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
 }
 
-.navbar-links div.selected>a {
-      background-color: #ffffff;
-      color: #086375;
-      margin: 0;
-      border: none;
+/* Position the "next button" to the right */
+
+.next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
 }
 
-.navbar-links div.selected> a> i.fa {
-      color: #086375;
+/* On hover, add a black background color with a little bit see-through */
+
+.prev:hover, .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
 }
 
-.navbar-links div>a i.fa {
-      position: relative;
-      font-size: 16px;
+/* Caption text */
+
+.text {
+      color: #f2f2f2;
+      font-size: 15px;
+      padding: 8px 12px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background-color: rgb(0, 0, 0);
+      opacity: 0.8;
+}
+
+/* Number text (1/3 etc) */
+
+.numbertext {
+      color: #ffffff;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
       top: 0;
-      width: 40px;
-      text-align: center;
 }
 
-.navbar-links div>a i.fa-caret-down, .navbar-links div>a i.fa-caret-up {
-      display: block;
-      float: right;
+/* The dots/bullets/indicators */
+
+.dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
 }
 
-.navbar-links div ul.sub-links {
-      max-height: 0;
-      overflow: hidden;
-      list-style: none;
-      padding: 0 0 0 30px;
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      line-height: 24px;
-      margin: 0;
-      transition: 0.4s;
-      letter-spacing: 0.05em;
+.active, .dot:hover {
+      background-color: #717171;
 }
 
-.navbar-links div.selected ul.sub-links {
-      max-height: 150px;
-      padding: 12px 0 12px 45px;
+/* Fading animation */
+
+.fade {
+      -webkit-animation-name: fade;
+      -webkit-animation-duration: 1.5s;
+      animation-name: fade;
+      animation-duration: 1.5s;
 }
 
-.navbar-links div .sub-links a {
-      text-decoration: none;
-      color: white;
-      display: block;
-      text-align: left;
+@-webkit-keyframes fade {
+      from {
+            opacity: .4
+      }
+      to {
+            opacity: 1
+      }
 }
 
-.navbar-links div a i.fa {
-      color: #AFFC41;
+@keyframes fade {
+      from {
+            opacity: 0.5
+      }
+      to {
+            opacity: 1
+      }
 }
 
-.navbar-links div a {
-      border-color: #AFFC41;
-}
+/* On smaller screens, decrease text size */
 
-@media (min-width: 450px) {
-      
-}
-
-@media (min-width: 900px) {
-      .closebtn {
-            display: none;
+@media only screen and (max-width: 300px) {
+      .prev, .next, .text {
+            font-size: 11px
       }
-      .openbtn {
-            display: none;
-      }
-
-      .header .navbar {
-            width: 100%;
-            margin: 0;
-            position: static;
-      }
-
-      .navbar .navbar-links {
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: flex-end;
-	}
-      
-      .navbar-links div {
-		display: inline-block;
-            width: 140px;
-            margin: 0;
-            padding: 0;
-      }
-
-      div.selected>a {
-            border-radius: 3px 3px 0 0;
-      }
-
-      .navbar-links div > a {
-		text-align: center;
-		margin: 0;
-            padding: 10px 0;
-            border: none;
-            font-size: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-      }
-
-	.navbar-links div > a i.fa {
-            display: block;
-            top: -1px;
-            font-size: 14px;
-            margin-left: 0;
-      }
-
-	.navbar-links div ul.sub-links {
-		display: none;
-	}
-
-	.navbar-links div.selected ul.sub-links {
-            max-height: 500px;
-            width: 140px;
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-		position: absolute;
-		text-align: center;
-            flex-direction: column;
-            padding-left: 0;
-            padding-top: 5px;
-            margin: 0;
-            background-color: #086375;
-            border-radius: 0 0 5px 5px;
-            z-index: 1;
-	}
-
-	.navbar-links div.selected .sub-links li {
-            display: block;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-	}
-
-	.navbar-links div.selected .sub-links a {
-            margin: auto;
-            display: block;
-		font-size: 12px;
-		color: white;
-		border-radius: 3px;
-            margin-top: 5px;
-            text-align: center;
-            transition: 0.15s;
-      }
-      
-      .navbar-links div.selected .sub-links a:hover {
-            color: #AFFC41;
-            transform: scale(1.11);
-      }
-
 }

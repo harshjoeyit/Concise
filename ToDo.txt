@@ -7,7 +7,6 @@
 
 6. More features 
       - trending - carousel on home page for trending 
-      - navigation
 
 
 

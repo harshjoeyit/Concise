@@ -194,7 +194,7 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "<div class='info'>";
             item_str += "<h2>" + element.title + " (" + element.release_date.substring(0, 4) + ")" + "</h2>";
             if (element.tagline) {
-                  item_str += "<p style='position: relative; top: -15px; color: grey;'><b>" + element.tagline + "</b></p>";
+                  item_str += "<p style='position: relative; top: -15px;'><b>" + element.tagline + "</b></p>";
             }
             item_str += "<div>";
             item_str += "<span><i style='color: #742ce8' class='fa fa-calendar'></i>" + element.release_date + "</span>";

@@ -3,213 +3,68 @@
 
 <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>First page</title>
       <link rel="stylesheet" href="first.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet' type='text/css'>
-      <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
-      <title> Nav</title>
+      <title>First page</title>
 </head>
 
 <body>
-      <div class="header">
-            <span class='logo'>Concise</span>
-            <span class='openbtn' onclick="openNav()"><i class="fa fa-bars" aria-hidden="true"></i></span>
-            <div id="mynavbar" class="navbar">
-                  <div class="navbar-links">
-                        <div class="link-yellow">
-                              <a href=javascript:void(0)>
-                                    <i class="fa fa-search"></i>Search
-                                    <i class="fa fa-caret-down"></i>
-                              </a>
-                              <ul class="sub-links">
-                                    <li><a href=javascript:void(0)>Advanced</a></li>
-                                    <li><a href=javascript:void(0)>Movie</a></li>
-                                    <li><a href=javascript:void(0)>Tv Show</a></li>
-                                    <li><a href=javascript:void(0)>Person</a></li>
-                              </ul>
-                        </div>
-
-                        <div class="link-red">
-                              <a href=javascript:void(0)>
-                                    <i class="fa fa-film" aria-hidden="true"></i>Movies
-                                    <i class="fa fa-caret-down"></i>
-                              </a>
-                              <ul class="sub-links">
-                                    <li><a href="discover_results.html?movie&most-liked&1">Most Liked</a></li>
-                                    <li><a href="discover_results.html?movie&highest-grossing&1">Highest grossing</a>
-                                    </li>
-                                    <li><a href="discover_results.html?movie&select-genres">With genres</a></li>
-                                    <li><a href="discover_results.html?movie&select-year">With year</a></li>
-                              </ul>
-                        </div>
-
-                        <div class="link-green">
-                              <a href=javascript:void(0)>
-                                    <i class="fa fa-tv"></i>Tv Shows
-                                    <i class="fa fa-caret-down"></i>
-                              </a>
-                              <ul class="sub-links">
-                                    <li><a href="discover_results.html?tv&most-liked&1">Most Liked</a></li>
-                                    <li><a href="discover_results.html?tv&select-genres">With genres</a></li>
-                              </ul>
-                        </div>
-
-                        <div class="link-orange">
-                              <a href=javascript:void(0)>
-                                    <i class="fa fa-pencil"></i>Recommend
-                                    <i class="fa fa-caret-down"></i>
-                              </a>
-                              <ul class="sub-links">
-                                    <li><a href="recommend.html?movie">Movie</a></li>
-                                    <li><a href="recommend.html?tv">Tv Show</a></li>
-                              </ul>
-                        </div>
-
-                        <div class="link-blue">
-                              <a href=javascript:void(0)>
-                                    <i class="fa fa-info-circle"></i>About
-                                    <i class="fa fa-caret-down"></i>
-                              </a>
-                              <ul class="sub-links">
-                                    <li><a href="about.html">Concise</a></li>
-                                    <li><a href="developer.html">Developer</a></li>
-                              </ul>
-                        </div>
-                  </div>
+      <div class="slideshow-container">
+            <div class="mySlides fade">
+                  <div class="numbertext">1 / 3</div>
+                  <img src="./images/poster1.jpg" style="width:100%">
+                  <div class="text">Caption Text</div>
             </div>
+
+            <div class="mySlides fade">
+                  <div class="numbertext">2 / 3</div>
+                  <img src="./images/poster2.jpg" style="width:100%">
+                  <div class="text">Caption Two</div>
+            </div>
+
+            <div class="mySlides fade">
+                  <div class="numbertext">3 / 3</div>
+                  <img src="./images/poster3.jpg" style="width:100%">
+                  <div class="text">Caption Three</div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
       </div>
-      <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the navbar to sit on top of the page -->
-      <div id="main">
-            <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Arcu vitae elementum curabitur vitae nunc. Semper viverra nam libero justo
-                  laoreet sit amet cursus. Suspendisse ultrices gravida dictum fusce ut placerat orci. Risus nullam eget
-                  felis eget nunc lobortis mattis aliquam faucibus. Quis imperdiet massa tincidunt nunc pulvinar sapien
-                  et. Cras pulvinar mattis nunc sed blandit libero volutpat sed cras. Elit ut aliquam purus sit. Commodo
-                  elit at imperdiet dui accumsan sit. Tortor at auctor urna nunc id cursus metus aliquam. Et tortor
-                  consequat id porta nibh. Mi tempus imperdiet nulla malesuada pellentesque. Pellentesque diam volutpat
-                  commodo sed egestas egestas fringilla phasellus faucibus. Hac habitasse platea dictumst quisque.
+      <br>
 
-                  Justo donec enim diam vulputate ut. Nunc id cursus metus aliquam. Urna porttitor rhoncus dolor purus
-                  non enim. Euismod lacinia at quis risus. Iaculis eu non diam phasellus. Suscipit adipiscing bibendum
-                  est ultricies. Rutrum quisque non tellus orci ac auctor. In est ante in nibh. Cursus vitae congue
-                  mauris rhoncus aenean vel elit scelerisque. Dapibus ultrices in iaculis nunc sed augue. Pellentesque
-                  diam volutpat commodo sed egestas. In aliquam sem fringilla ut morbi tincidunt augue interdum velit.
-
-                  Sed turpis tincidunt id aliquet. Quisque non tellus orci ac auctor. Pellentesque diam volutpat commodo
-                  sed egestas egestas fringilla. Habitasse platea dictumst quisque sagittis purus sit amet volutpat.
-                  Cras fermentum odio eu feugiat pretium nibh. Habitasse platea dictumst quisque sagittis purus sit.
-                  Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. At urna condimentum mattis
-                  pellentesque id nibh tortor id aliquet. Risus feugiat in ante metus dictum at tempor commodo. Quis
-                  viverra nibh cras pulvinar mattis nunc.
-
-                  Viverra nam libero justo laoreet sit. Accumsan tortor posuere ac ut consequat. Suspendisse sed nisi
-                  lacus sed viverra tellus. Ultrices sagittis orci a scelerisque purus. Et leo duis ut diam quam nulla
-                  porttitor massa. Ac odio tempor orci dapibus ultrices in iaculis nunc. Eget egestas purus viverra
-                  accumsan in nisl nisi scelerisque. Malesuada fames ac turpis egestas integer eget. Sed viverra ipsum
-                  nunc aliquet bibendum enim. Venenatis urna cursus eget nunc scelerisque. Tortor condimentum lacinia
-                  quis vel eros. Adipiscing elit ut aliquam purus sit amet luctus. Fermentum et sollicitudin ac orci.
-                  Tincidunt tortor aliquam nulla facilisi cras fermentum odio.
-
-                  Praesent elementum facilisis leo vel. Nisl suscipit adipiscing bibendum est ultricies. Mattis nunc sed
-                  blandit libero volutpat. Turpis egestas sed tempus urna et pharetra pharetra massa massa. Leo a diam
-                  sollicitudin tempor id eu. Adipiscing tristique risus nec feugiat in fermentum posuere urna nec. Nec
-                  feugiat nisl pretium fusce id velit ut. Egestas purus viverra accumsan in. Id nibh tortor id aliquet
-                  lectus. Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. Pellentesque
-                  adipiscing commodo elit at imperdiet dui accumsan sit. Duis at tellus at urna condimentum mattis
-                  pellentesque.
-
-                  Pulvinar sapien et ligula ullamcorper malesuada proin libero nunc. Tellus rutrum tellus pellentesque
-                  eu tincidunt tortor aliquam nulla facilisi. Sit amet mauris commodo quis imperdiet massa tincidunt.
-                  Amet porttitor eget dolor morbi. Diam quam nulla porttitor massa id. Risus ultricies tristique nulla
-                  aliquet enim tortor at auctor urna. Purus in mollis nunc sed id semper risus in. Porttitor lacus
-                  luctus accumsan tortor posuere ac ut. Dui id ornare arcu odio ut sem. Porta non pulvinar neque laoreet
-                  suspendisse interdum consectetur libero. Commodo sed egestas egestas fringilla phasellus faucibus
-                  scelerisque eleifend donec. Feugiat pretium nibh ipsum consequat nisl vel pretium. Orci sagittis eu
-                  volutpat odio facilisis. Turpis egestas maecenas pharetra convallis posuere morbi leo urna. Viverra
-                  adipiscing at in tellus integer feugiat scelerisque varius.
-
-                  Mauris augue neque gravida in fermentum et sollicitudin ac orci. Amet purus gravida quis blandit.
-                  Etiam non quam lacus suspendisse faucibus interdum posuere. Consequat interdum varius sit amet.
-                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. In cursus turpis massa tincidunt
-                  dui ut. Nisl nisi scelerisque eu ultrices. Mattis vulputate enim nulla aliquet porttitor. Nibh
-                  praesent tristique magna sit amet. Egestas sed sed risus pretium quam vulputate dignissim. Tellus
-                  rutrum tellus pellentesque eu. Vel elit scelerisque mauris pellentesque pulvinar pellentesque.
-                  Tristique risus nec feugiat in fermentum posuere urna nec. Ipsum faucibus vitae aliquet nec
-                  ullamcorper. Interdum velit euismod in pellentesque massa placerat duis ultricies lacus. Pharetra et
-                  ultrices neque ornare. Non sodales neque sodales ut etiam. At tellus at urna condimentum. Fames ac
-                  turpis egestas maecenas pharetra convallis posuere morbi.
-
-                  Nisi porta lorem mollis aliquam. Felis eget nunc lobortis mattis. Fames ac turpis egestas sed tempus
-                  urna et pharetra pharetra. In ante metus dictum at tempor commodo ullamcorper a lacus. Lacus viverra
-                  vitae congue eu. Nisi porta lorem mollis aliquam ut porttitor. Commodo odio aenean sed adipiscing diam
-                  donec adipiscing tristique. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare
-                  suspendisse. Eget magna fermentum iaculis eu non diam phasellus. Tristique risus nec feugiat in
-                  fermentum. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam. Adipiscing elit
-                  duis tristique sollicitudin nibh sit amet. Tempor orci dapibus ultrices in iaculis nunc sed augue
-                  lacus. Malesuada fames ac turpis egestas sed tempus urna et. Diam in arcu cursus euismod quis viverra
-                  nibh cras. Aliquam faucibus purus in massa tempor nec. Fusce ut placerat orci nulla pellentesque
-                  dignissim enim sit.
-
-                  Nunc scelerisque viverra mauris in aliquam. Felis imperdiet proin fermentum leo. Diam maecenas
-                  ultricies mi eget. Massa sapien faucibus et molestie. Vel turpis nunc eget lorem dolor sed. Ipsum
-                  dolor sit amet consectetur adipiscing. Integer quis auctor elit sed vulputate. Tristique et egestas
-                  quis ipsum suspendisse ultrices. Duis tristique sollicitudin nibh sit amet commodo nulla. Est placerat
-                  in egestas erat imperdiet sed. Mauris rhoncus aenean vel elit scelerisque mauris pellentesque
-                  pulvinar. Lacus sed viverra tellus in hac habitasse platea. Cursus in hac habitasse platea.
-
-                  In dictum non consectetur a erat. Bibendum est ultricies integer quis auctor. Duis ultricies lacus sed
-                  turpis. Massa enim nec dui nunc mattis. Ultricies integer quis auctor elit sed. Faucibus a
-                  pellentesque sit amet porttitor eget dolor morbi non. Scelerisque felis imperdiet proin fermentum leo
-                  vel. Facilisis mauris sit amet massa vitae tortor condimentum lacinia. Ultricies integer quis auctor
-                  elit sed vulputate. Ac tortor vitae purus faucibus ornare suspendisse sed nisi. Vulputate dignissim
-                  suspendisse in est ante in nibh mauris. Massa sapien faucibus et molestie ac feugiat sed lectus. Vel
-                  quam elementum pulvinar etiam non quam lacus suspendisse. Sed vulputate odio ut enim. Quis lectus
-                  nulla at volutpat diam ut venenatis. Vel elit scelerisque mauris pellentesque pulvinar pellentesque
-                  habitant.
-            </p>
+      <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
       </div>
+
       <script>
-            function openNav() {
-                  // document.getElementById("mynavbar").style.width = "70%";
-                  if (document.getElementById("mynavbar").style.width == "60%") {
-                        document.getElementById("mynavbar").style.width = "0";
-                  } else {
-                        document.getElementById("mynavbar").style.width = "60%";
-                  }
-            }
-            /* for opening up links when the main links are clicked */
-            var links = document.querySelectorAll('.navbar-links>div');
+            var slideIndex = 1;
+            showSlides(slideIndex);
 
-            for (var i = 0; i < links.length; i++) {
-                  links[i].addEventListener('click', function () {
-                        var curr = document.querySelector('.selected');
-                        var currCaret = document.querySelectorAll('.selected>a>i')[1];
-
-                        if (curr == this) {
-                              curr.classList.remove('selected');
-                              swapCaretClass(currCaret);
-                        } else {
-                              if (curr) {
-                                    curr.classList.remove('selected');
-                                    swapCaretClass(currCaret);
-                              }
-                              this.classList.add('selected');
-                              var caret = document.querySelectorAll('.selected>a>i')[1];
-                              swapCaretClass(caret);
-                        }
-                  });
+            function plusSlides(n) {
+                  showSlides(slideIndex += n);
             }
 
-            function swapCaretClass(el) {
-                  if (el.classList.contains('fa-caret-down')) {
-                        el.classList.remove('fa-caret-down');
-                        el.classList.add('fa-caret-up');
-                  } else if (el.classList.contains('fa-caret-up')) {
-                        el.classList.remove('fa-caret-up');
-                        el.classList.add('fa-caret-down');
+            function currentSlide(n) {
+                  showSlides(slideIndex = n);
+            }
+
+            function showSlides(n) {
+                  var i;
+                  var slides = document.getElementsByClassName("mySlides");
+                  var dots = document.getElementsByClassName("dot");
+                  if (n > slides.length) { slideIndex = 1 }
+                  if (n < 1) { slideIndex = slides.length }
+                  for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
                   }
+                  for (i = 0; i < dots.length; i++) {
+                        dots[i].className = dots[i].className.replace(" active", "");
+                  }
+                  slides[slideIndex - 1].style.display = "block";
+                  dots[slideIndex - 1].className += " active";
             }
       </script>
 </body>
