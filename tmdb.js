@@ -124,7 +124,7 @@ function constructHTMLStr(element, media) {
       } 
       
       if (media === "movie") {
-            item_str = "<div data-aos='flip-down' class='item movie' id=" + element.id + ">";
+            item_str = "<div class='item movie' id=" + element.id + ">";
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
                   item_str += "<img src=./images/media.png alt='poster'>"
@@ -158,7 +158,7 @@ function constructHTMLStr(element, media) {
             item_str += "</div>";
       
       } else if (media === "tv") {
-            item_str = "<div data-aos='flip-down' class='item tv' id=" + element.id + ">";
+            item_str = "<div class='item tv' id=" + element.id + ">";
             item_str += "<div class='poster'>";
             if (element.poster_path == null) {
                   item_str += "<img src=./images/media.png alt='poster'>"
@@ -192,7 +192,7 @@ function constructHTMLStr(element, media) {
             item_str += "</div>";
       
       } else if (media === "person") {
-            item_str = "<div data-aos='flip-down' class='item person' id=" + element.id + ">";
+            item_str = "<div class='item person' id=" + element.id + ">";
             item_str += "<div class='poster'>";
             if (element.profile_path == null) {
                   item_str += "<img src=./images/user.png alt='poster'>"
