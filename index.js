@@ -13,11 +13,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
       function addListenerForSearchLinks(link, str) {
             link.addEventListener('click', function () {
-                  searchResultLocation = baseSearchResultLocation + "?" + str + "=";
-                  if(str != "multi") {
-                        searchBtn.textContent = str.charAt(0).toUpperCase() + str.slice(1) + " Search";
+                  openNav();
+                  searchInput.focus();
+                  if(str === "multi") {
+                        searchInput.placeholder = "Search Movies, TV Shows, Celebs ...";
+                  } else if(str === "movie") {
+                        searchInput.placeholder = "Search Movies";
+                  } else if(str === "tv") {
+                        searchInput.placeholder = "Search TV Shows";
                   } else {
-                        searchBtn.textContent = "Search";
+                        searchInput.placeholder = "Search Celebs";
                   }
             });
       }
