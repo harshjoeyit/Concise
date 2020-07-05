@@ -2,7 +2,9 @@ function openNav() {
       // document.getElementById("mynavbar").style.width = "70%";
       if (document.getElementById("mynavbar").style.width == "100%") {
             document.getElementById("mynavbar").style.width = "0";
-            document.querySelector('.selected').click();
+            if(document.querySelector('.selected')) {
+                  document.querySelector('.selected').click();
+            }
       } else {
             document.getElementById("mynavbar").style.width = "100%";
       }

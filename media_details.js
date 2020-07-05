@@ -176,7 +176,7 @@ function addEventListenerToVideos() {
 }
 
 function noResults() {
-      document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">Page not found!</h1>';
+      document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center"><i style="color: #AFFC41" class="fa fa-frown-o" aria-hidden="true"></i> No results found!</h1>';
 }
 
 function constructMediaDetailsHTMLStr(element) {
@@ -368,7 +368,7 @@ function constructMediaDetailsHTMLStr(element) {
             item_str += "<div class='detail-box'>";
             item_str += "<div class='seasons-box'>";
             element.episodes.forEach(project => {
-                  var proj_str = "<div data-aos='flip-down' class='episode'>";
+                  var proj_str = "<div class='episode'>";
                   if (project.still_path == null) {
                         proj_str += "<img src=./images/media.png alt='poster'>"
                   } else {

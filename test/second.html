@@ -4,11 +4,124 @@
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title> Nav</title>
+      <link rel="stylesheet" href="second.css">
+      <title>Gallery</title>
 </head>
 
 <body>
-      
+      <div class="row">
+            <div class="column">
+                  <!-- <img src="./images/poster1.jpg" style="width:100%"> -->
+                  <div class="slideshow movie-slideshow">
+                        <h3>Trending Movies</h3>
+                        <div class="slideshow-container">
+                              <div class="mySlides fade movieSlides">
+                                    <div class="numbertext">1 / 3</div>
+                                    <img src="./images/poster1.jpg" style="width:100%">
+                                    <div class="text">Caption Text</div>
+                              </div>
+
+                              <div class="mySlides fade movieSlides">
+                                    <div class="numbertext">2 / 3</div>
+                                    <img src="./images/poster2.jpg" style="width:100%">
+                                    <div class="text">Caption Two</div>
+                              </div>
+            
+                              <div class="mySlides fade movieSlides">
+                                    <div class="numbertext">3 / 3</div>
+                                    <img src="./images/poster3.jpg" style="width:100%">
+                                    <div class="text">Caption Three</div>
+                              </div>
+            
+                              <a class="prev" onclick="plusMovieSlides(-1)">&#10094;</a>
+                              <a class="next" onclick="plusMovieSlides(1)">&#10095;</a>
+            
+                        </div>
+                        <br>
+            
+                        <div style="text-align:center">
+                              <span class="dot movieDot" onclick="currentMovieSlide(1)"></span>
+                              <span class="dot movieDot" onclick="currentMovieSlide(2)"></span>
+                              <span class="dot movieDot" onclick="currentMovieSlide(3)"></span>
+                        </div>
+                  </div>
+            </div>
+            <div class="column">
+                  <!-- <img src="./images/poster3.jpg" style="width:100%"> -->
+
+                  <div class="slideshow tv-slideshow">
+                        <h3>Trending TV Shows</h3>
+                        <div class="slideshow-container">
+                              <div class="mySlides fade tvSlides">
+                                    <div class="numbertext">1 / 3</div>
+                                    <img src="./images/poster1.jpg" style="width:100%">
+                                    <div class="text">Caption Text</div>
+                              </div>
+            
+                              <div class="mySlides fade tvSlides">
+                                    <div class="numbertext">2 / 3</div>
+                                    <img src="./images/poster2.jpg" style="width:100%">
+                                    <div class="text">Caption Two</div>
+                              </div>
+            
+                              <div class="mySlides fade tvSlides">
+                                    <div class="numbertext">3 / 3</div>
+                                    <img src="./images/poster3.jpg" style="width:100%">
+                                    <div class="text">Caption Three</div>
+                              </div>
+            
+                              <a class="prev" onclick="plusTVSlides(-1)">&#10094;</a>
+                              <a class="next" onclick="plusTVSlides(1)">&#10095;</a>
+            
+                        </div>
+                        <br>
+            
+                        <div style="text-align:center">
+                              <span class="dot tvDot" onclick="currentTVSlide(1)"></span>
+                              <span class="dot tvDot" onclick="currentTVSlide(2)"></span>
+                              <span class="dot tvDot" onclick="currentTVSlide(3)"></span>
+                        </div>
+                  </div>
+            </div>
+            <div class="column">
+                  <!-- <img src="./images/poster2.jpg" style="width:100%"> -->
+                  
+                  <div class="slideshow celeb-slideshow">
+                        <h3>Trending Celebs</h3>
+                        <div class="slideshow-container">
+                              <div class="mySlides fade celebSlides">
+                                    <div class="numbertext">1 / 3</div>
+                                    <img src="./images/poster1.jpg" style="width:100%">
+                                    <div class="text">Caption Text</div>
+                              </div>
+            
+                              <div class="mySlides fade celebSlides">
+                                    <div class="numbertext">2 / 3</div>
+                                    <img src="./images/poster2.jpg" style="width:100%">
+                                    <div class="text">Caption Two</div>
+                              </div>
+            
+                              <div class="mySlides fade celebSlides">
+                                    <div class="numbertext">3 / 3</div>
+                                    <img src="./images/poster3.jpg" style="width:100%">
+                                    <div class="text">Caption Three</div>
+                              </div>
+            
+                              <a class="prev" onclick="plusCelebSlides(-1)">&#10094;</a>
+                              <a class="next" onclick="plusCelebSlides(1)">&#10095;</a>
+            
+                        </div>
+                        <br>
+            
+                        <div style="text-align:center">
+                              <span class="dot celebDot" onclick="currentCelebSlide(1)"></span>
+                              <span class="dot celebDot" onclick="currentCelebSlide(2)"></span>
+                              <span class="dot celebDot" onclick="currentCelebSlide(3)"></span>
+                        </div>
+                  </div>
+            </div>
+      </div>
+      <script src="second.js"></script>
 </body>
 
 </html>

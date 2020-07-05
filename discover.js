@@ -154,7 +154,7 @@ function addEventListenerToButtons(currentPage, totalPages) {
 }
 
 function noResults() {
-      document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center">Page not found!</h1>';
+      document.querySelector('.main-content').innerHTML = '<h1 style="text-align:center"><i style="color: #AFFC41" class="fa fa-frown-o" aria-hidden="true"></i> No results found!</h1>';
 }
 
 function createInputForGenres() {
