@@ -13,7 +13,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
       function addListenerForSearchLinks(link, str) {
             link.addEventListener('click', function () {
-                  openNav();
+                  if(window.screen.width <= 900) {
+                        openNav();
+                  }
                   searchInput.focus();
                   if(str === "multi") {
                         searchInput.placeholder = "Search Movies, TV Shows, Celebs ...";
@@ -237,8 +239,6 @@ function showTVSlides(n) {
 
 
 var celebSlideIndex = 1;
-showCelebSlides(celebSlideIndex);
-
 function plusCelebSlides(n) {
       showCelebSlides(celebSlideIndex += n);
 }
