@@ -1,7 +1,28 @@
-# Concise - The Moviepedia
+# Concise
+The Moviepedia
 
-- Concise is an effort to create an user-friendly, easy to use and interactive interface of The Movie Database (TMDB).
-- It can answer all your queries regarding the entertainment section.
-- It also gives you suggestions of movies and TV Shows.
-- It gives you a good experience accross all screen sizes.
+### How to run?
+* Clone the Repository.
+* open `index.html` in a browser, and it's done.
 
+### Features 
+* Concise interface of The Movie Database (TMDB) with crisp information of entertainment domain.
+* Search movies, TV Shows & Celebs 
+* Find similar Movies & Shows 
+* Trailers and Extras from youtube
+* Find using Genre/Category, Year of release
+* Gives recommendations based on ratings and popularit
+* Includes trailers and extras from youtube and images
+* Bring to you a good experience accross all screen sizes.
+
+# Teach Stack 
+* JavaScript 
+* HTML&CSS
+
+### A sneak peek
+<img src="images/four.png" width="100%">
+<img src="images/five.png" width="100%">
+<img src="images/three.png" width="100%">
+<img src="images/two.png" width="100%">
+<img src="images/one.png" width="100%">
+<img src="images/six.png" width="100%">
