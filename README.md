@@ -1,6 +1,9 @@
 # Concise
 The Moviepedia
 
+### Live at
+[Concise](https://harshjoeyit.github.io/Concise)
+
 ### How to run?
 * Clone the Repository.
 * open `index.html` in a browser, and it's done.
@@ -15,7 +18,7 @@ The Moviepedia
 * Includes trailers and extras from youtube and images
 * Bring to you a good experience accross all screen sizes.
 
-# Teach Stack 
+### Tech Stack 
 * JavaScript 
 * HTML&CSS
 
@@ -24,5 +27,5 @@ The Moviepedia
 <img src="images/five.png" width="100%">
 <img src="images/three.png" width="100%">
 <img src="images/two.png" width="100%">
-<img src="images/one.png" width="100%">
+<img src="images/one.png" width="40%">
 <img src="images/six.png" width="100%">
