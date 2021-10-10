@@ -21,6 +21,7 @@ The Moviepedia
 ### Tech Stack 
 * JavaScript 
 * HTML&CSS
+* [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction)
 
 ### A sneak peek
 <img src="images/four.png" width="100%">
